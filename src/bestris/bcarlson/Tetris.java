@@ -73,8 +73,8 @@ public class Tetris extends JPanel{
 
         return dimg;
     }  
+    
     public static BufferedImage joinBufferedImage(BufferedImage img1, BufferedImage img2) {
-
         //do some calculate first
         int offset  = 0;
         int wid = img1.getWidth() + img2.getWidth() + offset;
