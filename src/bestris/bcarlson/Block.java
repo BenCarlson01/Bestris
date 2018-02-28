@@ -5,7 +5,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class Block {
-	public static final String[] SET_VALUES =
+	private static final String[] SET_VALUES =
 			new String[] {"red", "green", "dblue", "orange", "yellow", "purple", "lblue", "clear" };
 	private final Set<String> COLORS = new HashSet<>(Arrays.asList(SET_VALUES));
 	private String color;
@@ -32,6 +32,10 @@ public class Block {
 		if (color.equals("clear")) {
 			setInvisible();
 		}
+	}
+	
+	public String getColor() {
+		return color;
 	}
 	
 	
