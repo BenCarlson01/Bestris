@@ -67,7 +67,7 @@ public class Background extends JPanel{
 		for (int i = 0; i < 10; i++) {
 			for (int j = 0; j < 22; j++) {
 				blocks[i][j] = new Block();
-				blocks[i][j].setColor("purple");
+				blocks[i][j].setColor("clear");
 			}
 		}
 		heights = new int[10];
