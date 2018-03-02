@@ -94,7 +94,7 @@ public class Background extends JPanel implements KeyListener{
 			return;
 		}
 		colorToBlock = Collections.unmodifiableMap(temp);
-		cur = new YellowBlock(blocks);
+		cur = new LBlueBlock(blocks);
 		time = 0;
 		timer = new Timer(10, new ActionListener() {
             @Override
@@ -139,7 +139,7 @@ public class Background extends JPanel implements KeyListener{
         for (int i = 0; i < blocks.length; i++) {
         	for (int j = 0; j < blocks[0].length; j++) {
                 g.drawImage(colorToBlock.get(blocks[i][j].getColor()), i * 25, j * 25, this);
-                blocks[i][j].setColor(SET_VALUES[(int) (Math.random() *SET_VALUES.length)]);
+                //blocks[i][j].setColor(SET_VALUES[(int) (Math.random() *SET_VALUES.length)]);
         	}
         }
     }

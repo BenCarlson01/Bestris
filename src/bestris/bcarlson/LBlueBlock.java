@@ -1,7 +1,7 @@
 package bestris.bcarlson;
 
 public class LBlueBlock implements Block4 {
-	//Top Left Corner
+	//BCBB
 	//For Y values, 0 is top, 22 is bot
 	private int x;
 	private int y;
@@ -11,20 +11,20 @@ public class LBlueBlock implements Block4 {
 		x = 4;
 		y = 0;
 		blocks = b;
+		blocks[x - 1][y].setColor("lblue");
 		blocks[x][y].setColor("lblue");
-		blocks[x][y + 1].setColor("lblue");
 		blocks[x + 1][y].setColor("lblue");
-		blocks[x + 1][y + 1].setColor("lblue");
+		blocks[x + 2][y].setColor("lblue");
 	}
 	
 	public LBlueBlock(int x, int y, Block[][] b) {
 		this.x = x;
 		this.y = y;
 		blocks = b;
+		blocks[x - 1][y].setColor("lblue");
 		blocks[x][y].setColor("lblue");
-		blocks[x][y + 1].setColor("lblue");
 		blocks[x + 1][y].setColor("lblue");
-		blocks[x + 1][y + 1].setColor("lblue");
+		blocks[x + 2][y].setColor("lblue");
 	}
 	
 	public void turnLeft() {
