@@ -61,6 +61,9 @@ public class Background extends JPanel{
 	
 	private Block[][] blocks;
 	private int[] heights;
+	private Block4 cur;
+	private int speed;
+	private Timer timer;
 	
 	public Background() {
 		blocks = new Block[10][22];
@@ -88,7 +91,9 @@ public class Background extends JPanel{
 			return;
 		}
 		colorToBlock = Collections.unmodifiableMap(temp);
-		Timer timer = new Timer(400, new ActionListener() {
+		cur = new YellowBlock(blocks);
+		speed = 400;
+		timer = new Timer(0, new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 repaint();
@@ -102,9 +107,10 @@ public class Background extends JPanel{
 	
 	public void moveDown(String blocktype) {
 		if (!BLOCKTYPES.contains(blocktype)) {
+			System.out.println("Block does not exist");
 			return;
 		}
-		if (blocktype.equals("purple")) {
+		if (blocktype.equals("yellow")) {
 			
 		} else {
 			System.out.println("Unsupported Operation, Please Contact Creator");
@@ -120,13 +126,15 @@ public class Background extends JPanel{
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
-
+        
+        cur.moveDown();
         for (int i = 0; i < blocks.length; i++) {
         	for (int j = 0; j < blocks[0].length; j++) {
                 g.drawImage(colorToBlock.get(blocks[i][j].getColor()), i * 25, j * 25, this);
-                blocks[i][j].setColor(SET_VALUES[(int) (Math.random() *SET_VALUES.length)]);
+                //blocks[i][j].setColor(SET_VALUES[(int) (Math.random() *SET_VALUES.length)]);
         	}
         }
+        timer.setDelay(speed);
     }
 
     public static BufferedImage resize(BufferedImage img, int newW, int newH) { 
