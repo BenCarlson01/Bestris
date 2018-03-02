@@ -6,6 +6,8 @@ import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -20,7 +22,7 @@ import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
-public class Background extends JPanel{
+public class Background extends JPanel implements KeyListener{
 	/**
 	 * Block Information:
 	 * 	B: part of block
@@ -62,7 +64,8 @@ public class Background extends JPanel{
 	private Block[][] blocks;
 	private int[] heights;
 	private Block4 cur;
-	private int speed;
+	private int speed = 30; // 1000 / speed milliseconds
+	private int time;
 	private Timer timer;
 	
 	public Background() {
@@ -92,8 +95,8 @@ public class Background extends JPanel{
 		}
 		colorToBlock = Collections.unmodifiableMap(temp);
 		cur = new YellowBlock(blocks);
-		speed = 400;
-		timer = new Timer(0, new ActionListener() {
+		time = 0;
+		timer = new Timer(10, new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 repaint();
@@ -127,14 +130,18 @@ public class Background extends JPanel{
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
         
-        cur.moveDown();
+        if (time > 1000) {
+        	cur.moveDown();
+        	time = 0;
+        } else {
+        	time += speed;
+        }
         for (int i = 0; i < blocks.length; i++) {
         	for (int j = 0; j < blocks[0].length; j++) {
                 g.drawImage(colorToBlock.get(blocks[i][j].getColor()), i * 25, j * 25, this);
                 //blocks[i][j].setColor(SET_VALUES[(int) (Math.random() *SET_VALUES.length)]);
         	}
         }
-        timer.setDelay(speed);
     }
 
     public static BufferedImage resize(BufferedImage img, int newW, int newH) { 
@@ -146,5 +153,30 @@ public class Background extends JPanel{
         g2d.dispose();
 
         return dimg;
-    }  
+    } 
+
+    /** Handle the key-pressed event from the text field. */
+    public void keyPressed(KeyEvent event) {
+    	int key = event.getKeyCode();
+		if (key == KeyEvent.VK_UP) {
+			//Currently does nothing
+		} else if (key == KeyEvent.VK_DOWN) {
+			cur.moveDown();
+		} else if (key == KeyEvent.VK_LEFT) {
+			cur.moveLeft();
+		} else if (key == KeyEvent.VK_RIGHT) {
+			cur.moveRight();
+		}
+    }
+
+	@Override
+	public void keyTyped(KeyEvent event) {
+		//Currently does nothing
+	}
+
+	@Override
+	public void keyReleased(KeyEvent event) {
+		//Currently does nothing
+	}
+    
 }
