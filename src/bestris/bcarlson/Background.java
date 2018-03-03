@@ -159,7 +159,7 @@ public class Background extends JPanel implements KeyListener{
     public void keyPressed(KeyEvent event) {
     	int key = event.getKeyCode();
 		if (key == KeyEvent.VK_UP) {
-			//Currently does nothing
+			cur.turnLeft();
 		} else if (key == KeyEvent.VK_DOWN) {
 			cur.moveDown();
 		} else if (key == KeyEvent.VK_LEFT) {
