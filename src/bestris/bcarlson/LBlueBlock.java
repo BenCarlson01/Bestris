@@ -3,15 +3,11 @@ package bestris.bcarlson;
 public class LBlueBlock implements Block4 {
 	//BCBB
 	//For Y values, 0 is top, 22 is bot
-	private int x;
-	private int y;
 	private Block[][] blocks;
 	private int[] cur;
 	private int[] prev;
 	
 	public LBlueBlock(Block[][] b) {
-		x = 4;
-		y = 0;
 		blocks = b;
 		cur = new int[8];
 		prev = new int[8];
@@ -24,6 +20,7 @@ public class LBlueBlock implements Block4 {
 		cur[6] = 6;
 		cur[7] = 0;
 		System.arraycopy(cur, 0, prev, 0, 8);
+		updateColor();
 	}
 	
 	public void turnLeft() {
@@ -84,6 +81,10 @@ public class LBlueBlock implements Block4 {
 		updateColor();
 	}
 	
+	public void hardDrop() {
+		//Do nothing
+	}
+	
 	private void updateColor() {
 		for (int i = 0; i < 8; i += 2) {
 			blocks[prev[i]][prev[i + 1]].setColor("clear"); 
@@ -91,5 +92,13 @@ public class LBlueBlock implements Block4 {
 		for (int i = 0; i < 8; i += 2) {	
 			blocks[cur[i]][cur[i + 1]].setColor("lblue"); 
 		}
+	}
+	
+	public boolean isStuck() {
+		return false;
+	}
+	
+	public void updateFull() {
+		//Does nothing
 	}
 }

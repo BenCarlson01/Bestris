@@ -62,7 +62,7 @@ public class Background extends JPanel implements KeyListener{
 	private Map<String, BufferedImage> colorToBlock;
 	
 	private Block[][] blocks;
-	private int[] heights;
+	private boolean[][] full;
 	private Block4 cur;
 	private int speed = 30; // 1000 / speed milliseconds
 	private int time;
@@ -76,9 +76,11 @@ public class Background extends JPanel implements KeyListener{
 				blocks[i][j].setColor("clear");
 			}
 		}
-		heights = new int[10];
+		full = new boolean[10][22];
 		for (int i = 0; i < 10; i++) {
-			heights[i] = 0;
+			for (int j = 0; j < 22; j++) {
+				full[i][j] = false;
+			}
 		}
 		Map<String, BufferedImage> temp = new HashMap<>();
 		try {
@@ -94,7 +96,7 @@ public class Background extends JPanel implements KeyListener{
 			return;
 		}
 		colorToBlock = Collections.unmodifiableMap(temp);
-		cur = new LBlueBlock(blocks);
+		cur = new YellowBlock(blocks, full);
 		time = 0;
 		timer = new Timer(10, new ActionListener() {
             @Override
@@ -132,10 +134,17 @@ public class Background extends JPanel implements KeyListener{
         
         if (time > 1000) {
         	cur.moveDown();
-        	time = 0;
-        } else {
-        	time += speed;
+        	if (cur.isStuck()) {
+        		if (time > 3000) {
+        			time = 0;
+        			cur.updateFull();
+        			cur = new YellowBlock(blocks, full);
+        		}
+        	} else {
+        		time = 0;
+        	}
         }
+        time += speed;
         for (int i = 0; i < blocks.length; i++) {
         	for (int j = 0; j < blocks[0].length; j++) {
                 g.drawImage(colorToBlock.get(blocks[i][j].getColor()), i * 25, j * 25, this);
@@ -166,7 +175,9 @@ public class Background extends JPanel implements KeyListener{
 			cur.moveLeft();
 		} else if (key == KeyEvent.VK_RIGHT) {
 			cur.moveRight();
-		}
+		} else if (key == KeyEvent.VK_SPACE){
+            cur.hardDrop();
+       }
     }
 
 	@Override

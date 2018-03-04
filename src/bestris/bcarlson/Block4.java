@@ -8,4 +8,7 @@ public interface Block4 {
 	public void moveLeft();
 	public void moveRight();
 	public void moveDown();
+	public void hardDrop();
+	public boolean isStuck();
+	public void updateFull();
 }

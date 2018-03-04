@@ -3,28 +3,26 @@ package bestris.bcarlson;
 public class YellowBlock implements Block4{
 	//Top Left Corner
 	//For Y values, 0 is top, 22 is bot
-	private int x;
-	private int y;
 	private Block[][] blocks;
+	private boolean[][] full;
+	private int[] cur;
+	private int[] prev;
 	
-	public YellowBlock(Block[][] b) {
-		x = 4;
-		y = 0;
+	public YellowBlock(Block[][] b, boolean[][] f) {
 		blocks = b;
-		blocks[x][y].setColor("yellow");
-		blocks[x][y + 1].setColor("yellow");
-		blocks[x + 1][y].setColor("yellow");
-		blocks[x + 1][y + 1].setColor("yellow");
-	}
-	
-	public YellowBlock(int x, int y, Block[][] b) {
-		this.x = x;
-		this.y = y;
-		blocks = b;
-		blocks[x][y].setColor("yellow");
-		blocks[x][y + 1].setColor("yellow");
-		blocks[x + 1][y].setColor("yellow");
-		blocks[x + 1][y + 1].setColor("yellow");
+		full = f;
+		cur = new int[8];
+		prev = new int[8];
+		cur[0] = 4;
+		cur[1] = 0;
+		cur[2] = 5;
+		cur[3] = 0;
+		cur[4] = 4;
+		cur[5] = 1;
+		cur[6] = 5;
+		cur[7] = 1;
+		System.arraycopy(cur, 0, prev, 0, 8);
+		updateColor();
 	}
 	
 	public void turnLeft() {
@@ -36,32 +34,89 @@ public class YellowBlock implements Block4{
 	}
 	
 	public void moveLeft() {
-		if (x > 0) {
-			x -= 1;
+		if (cur[0] <= 0 || cur[4] <= 0) {
+			return;
 		}	
-		blocks[x][y].setColor("yellow");
-		blocks[x][y + 1].setColor("yellow");
-		blocks[x + 2][y].setColor("clear");
-		blocks[x + 2][y + 1].setColor("clear");
+		if (full[cur[0] - 1][cur[1]] || full[cur[4] - 1][cur[5]]) {
+			return;
+		}
+		System.arraycopy(cur, 0, prev, 0, 8);
+		cur[0] -= 1;
+		cur[2] -= 1;
+		cur[4] -= 1;
+		cur[6] -= 1;
+		updateColor();
 	}
 	
 	public void moveRight() {
-		if (x < 8) {
-			x += 1;
+		if (cur[2] >= 9 || cur[6] >= 9) {
+			return;
 		}	
-		blocks[x + 1][y].setColor("yellow");
-		blocks[x + 1][y + 1].setColor("yellow");
-		blocks[x - 1][y].setColor("clear");
-		blocks[x - 1][y + 1].setColor("clear");
+		if (full[cur[2] + 1][cur[3]] || full[cur[6] + 1][cur[7]]) {
+			return;
+		}
+		System.arraycopy(cur, 0, prev, 0, 8);
+		cur[0] += 1;
+		cur[2] += 1;
+		cur[4] += 1;
+		cur[6] += 1;
+		updateColor();
 	}
 	
 	public void moveDown() {
-		if (y < 20) {
-			y += 1;
+		if (cur[5] >= 21 || cur[7] >= 21) {
+			return;
+		}	
+		if (full[cur[4]][cur[5] + 1] || full[cur[6]][cur[7] + 1]) {
+			return;
 		}
-		blocks[x][y + 1].setColor("yellow");
-		blocks[x + 1][y + 1].setColor("yellow");
-		blocks[x][y - 1].setColor("clear");
-		blocks[x + 1][y - 1].setColor("clear");
+		System.arraycopy(cur, 0, prev, 0, 8);
+		cur[1] += 1;
+		cur[3] += 1;
+		cur[5] += 1;
+		cur[7] += 1;
+		updateColor();
+	}
+	
+	public void hardDrop() {
+		int y1 = cur[5];
+		int y2 = cur[7];
+		while (y1 < 21 && !full[cur[4]][y1] && !full[cur[6]][y2]) {
+			y1 += 1;
+			y2 += 1;
+		}
+		System.arraycopy(cur, 0, prev, 0, 8);
+		cur[1] = y1 - 1;
+		cur[3] = y2 - 1;
+		cur[5] = y1;
+		cur[7] = y2;
+		updateColor();
+		updateFull();
+	}
+	
+	private void updateColor() {
+		for (int i = 0; i < 8; i += 2) {
+			blocks[prev[i]][prev[i + 1]].setColor("clear"); 
+		}
+		for (int i = 0; i < 8; i += 2) {	
+			blocks[cur[i]][cur[i + 1]].setColor("yellow"); 
+		}
+	}
+	
+	public boolean isStuck() {
+		if (cur[5] >= 21 || cur[7] >= 21) {
+			return true;
+		}
+		if (full[cur[4]][cur[5] + 1] || full[cur[6]][cur[7] + 1]) {
+			return true;
+		}
+		return false;
+	}
+	
+	public void updateFull() {
+		full[cur[0]][cur[1]] = true;
+		full[cur[2]][cur[3]] = true;
+		full[cur[4]][cur[5]] = true;
+		full[cur[6]][cur[7]] = true;
 	}
 }
