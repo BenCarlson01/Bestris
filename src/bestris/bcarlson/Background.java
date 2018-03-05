@@ -96,7 +96,7 @@ public class Background extends JPanel implements KeyListener{
 			return;
 		}
 		colorToBlock = Collections.unmodifiableMap(temp);
-		cur = new LBlueBlock(blocks, full);
+		cur = new YellowBlock(blocks, full);
 		time = 0;
 		timer = new Timer(10, new ActionListener() {
             @Override
@@ -141,7 +141,36 @@ public class Background extends JPanel implements KeyListener{
 	public void newBlock() {
 		time = 0;
 		cur.updateFull();
+		clearLine();
 		cur = new LBlueBlock(blocks, full);
+	}
+	
+	public void clearLine() {
+		for (int j = 0; j < 22; j++) {
+			int count = 0;
+			for (int i = 0; i < 10; i++) {
+				if (full[i][j]) {
+					count++;
+				}
+			}
+			if (count == 10) {
+				updateScore(100);
+				for (int i = 0; i < 10; i++) {
+					blocks[i][j].setColor("clear");
+					full[i][j] = false;
+				}
+				for (int j2 = j - 1; j2 >= 0; j2--) {
+					for (int i = 0; i < 10; i++) {
+						blocks[i][j2 + 1].setColor(blocks[i][j2].getColor());
+						full[i][j2 + 1] = full[i][j2];
+					}
+				}
+			}
+		}
+	}
+	
+	public int updateScore(int amt) {
+		return amt;
 	}
 
     public static BufferedImage resize(BufferedImage img, int newW, int newH) { 

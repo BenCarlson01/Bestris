@@ -24,6 +24,10 @@ public class Block {
 		visible = false;
 	}
 	
+	public boolean isVisible() {
+		return visible;
+	}
+	
 	public void setColor(String color) {
 		if (!COLORS.contains(color)) {
 			return;

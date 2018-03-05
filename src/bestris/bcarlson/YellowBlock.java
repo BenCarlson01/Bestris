@@ -1,15 +1,15 @@
 package bestris.bcarlson;
 
 public class YellowBlock extends Block4{
+	private static final String color = "yellow";
 	//Top Left Corner
 	//For Y values, 0 is top, 22 is bot
-	private Block[][] blocks;
 	private boolean[][] full;
 	private int[] cur;
 	private int[] prev;
 	
 	public YellowBlock(Block[][] b, boolean[][] f) {
-		blocks = b;
+		super(b, f);
 		full = f;
 		cur = new int[8];
 		prev = new int[8];
@@ -22,7 +22,8 @@ public class YellowBlock extends Block4{
 		cur[6] = 5;
 		cur[7] = 1;
 		System.arraycopy(cur, 0, prev, 0, 8);
-		updateColor();
+		setCurPrev(cur, prev);
+		updateColor(color);
 	}
 	
 	public void turnLeft() {
@@ -45,7 +46,7 @@ public class YellowBlock extends Block4{
 		cur[2] -= 1;
 		cur[4] -= 1;
 		cur[6] -= 1;
-		updateColor();
+		updateColor(color);
 	}
 	
 	public void moveRight() {
@@ -60,7 +61,7 @@ public class YellowBlock extends Block4{
 		cur[2] += 1;
 		cur[4] += 1;
 		cur[6] += 1;
-		updateColor();
+		updateColor(color);
 	}
 	
 	public void moveDown() {
@@ -75,7 +76,7 @@ public class YellowBlock extends Block4{
 		cur[3] += 1;
 		cur[5] += 1;
 		cur[7] += 1;
-		updateColor();
+		updateColor(color);
 	}
 	
 	public void hardDrop() {
@@ -86,32 +87,6 @@ public class YellowBlock extends Block4{
 		}
 		cur[1] = cur[5] - 1;
 		cur[3] = cur[7] - 1;
-		updateColor();
-	}
-	
-	private void updateColor() {
-		for (int i = 0; i < 8; i += 2) {
-			blocks[prev[i]][prev[i + 1]].setColor("clear"); 
-		}
-		for (int i = 0; i < 8; i += 2) {	
-			blocks[cur[i]][cur[i + 1]].setColor("yellow"); 
-		}
-	}
-	
-	public boolean isStuck() {
-		if (cur[5] >= 21 || cur[7] >= 21) {
-			return true;
-		}
-		if (full[cur[4]][cur[5] + 1] || full[cur[6]][cur[7] + 1]) {
-			return true;
-		}
-		return false;
-	}
-	
-	public void updateFull() {
-		full[cur[0]][cur[1]] = true;
-		full[cur[2]][cur[3]] = true;
-		full[cur[4]][cur[5]] = true;
-		full[cur[6]][cur[7]] = true;
+		updateColor(color);
 	}
 }
