@@ -4,11 +4,13 @@ public class LBlueBlock implements Block4 {
 	//BCBB
 	//For Y values, 0 is top, 22 is bot
 	private Block[][] blocks;
+	private boolean[][] full;
 	private int[] cur;
 	private int[] prev;
 	
-	public LBlueBlock(Block[][] b) {
+	public LBlueBlock(Block[][] b, boolean[][] f) {
 		blocks = b;
+		full = f;
 		cur = new int[8];
 		prev = new int[8];
 		cur[0] = 3;
@@ -46,7 +48,9 @@ public class LBlueBlock implements Block4 {
 	}
 	
 	public void moveLeft() {
-		if (cur[0] <= 0 || cur[6] <= 0) {
+		if (cur[0] <= 0 || cur[6] <= 0
+				|| full[cur[0] - 1][cur[1]] || full[cur[2] - 1][cur[3]]
+				|| full[cur[4] - 1][cur[5]] || full[cur[6] - 1][cur[7]]) {
 			return;
 		}
 		System.arraycopy(cur, 0, prev, 0, 8);
@@ -58,7 +62,9 @@ public class LBlueBlock implements Block4 {
 	}
 	
 	public void moveRight() {
-		if (cur[0] >= 9 || cur[6] >= 9) {
+		if (cur[0] >= 9 || cur[6] >= 9
+				|| full[cur[0] + 1][cur[1]] || full[cur[2] + 1][cur[3]]
+				|| full[cur[4] + 1][cur[5]] || full[cur[6] + 1][cur[7]]) {
 			return;
 		}
 		System.arraycopy(cur, 0, prev, 0, 8);
@@ -70,7 +76,9 @@ public class LBlueBlock implements Block4 {
 	}
 	
 	public void moveDown() {
-		if (cur[1] >= 21 || cur[7] >= 21) {
+		if (cur[1] >= 21 || cur[7] >= 21
+				|| full[cur[0]][cur[1] + 1] || full[cur[2]][cur[3] + 1]
+				|| full[cur[4]][cur[5] + 1] || full[cur[6]][cur[7] + 1]) {
 			return;
 		}
 		System.arraycopy(cur, 0, prev, 0, 8);
@@ -82,7 +90,15 @@ public class LBlueBlock implements Block4 {
 	}
 	
 	public void hardDrop() {
-		//Do nothing
+		System.arraycopy(cur, 0, prev, 0, 8);
+		while (cur[3] < 21 && !full[cur[0]][cur[1] + 1] && !full[cur[2]][cur[3] + 1]
+				&& !full[cur[4]][cur[5] + 1] && !full[cur[6]][cur[7] + 1]) {
+			cur[1] += 1;
+			cur[3] += 1;
+			cur[5] += 1;
+			cur[7] += 1;
+		}
+		updateColor();
 	}
 	
 	private void updateColor() {
@@ -99,6 +115,9 @@ public class LBlueBlock implements Block4 {
 	}
 	
 	public void updateFull() {
-		//Does nothing
+		full[cur[0]][cur[1]] = true;
+		full[cur[2]][cur[3]] = true;
+		full[cur[4]][cur[5]] = true;
+		full[cur[6]][cur[7]] = true;
 	}
 }

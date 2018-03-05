@@ -96,7 +96,7 @@ public class Background extends JPanel implements KeyListener{
 			return;
 		}
 		colorToBlock = Collections.unmodifiableMap(temp);
-		cur = new YellowBlock(blocks, full);
+		cur = new LBlueBlock(blocks, full);
 		time = 0;
 		timer = new Timer(10, new ActionListener() {
             @Override
@@ -108,19 +108,6 @@ public class Background extends JPanel implements KeyListener{
         timer.setRepeats(true);
         timer.setCoalesce(true);
         timer.start();
-	}
-	
-	public void moveDown(String blocktype) {
-		if (!BLOCKTYPES.contains(blocktype)) {
-			System.out.println("Block does not exist");
-			return;
-		}
-		if (blocktype.equals("yellow")) {
-			
-		} else {
-			System.out.println("Unsupported Operation, Please Contact Creator");
-			return;
-		}
 	}
 	
 	@Override
@@ -135,10 +122,8 @@ public class Background extends JPanel implements KeyListener{
         if (time > 1000) {
         	cur.moveDown();
         	if (cur.isStuck()) {
-        		if (time > 3000) {
-        			time = 0;
-        			cur.updateFull();
-        			cur = new YellowBlock(blocks, full);
+        		if (time > 5000) {
+        			newBlock();
         		}
         	} else {
         		time = 0;
@@ -152,6 +137,12 @@ public class Background extends JPanel implements KeyListener{
         	}
         }
     }
+	
+	public void newBlock() {
+		time = 0;
+		cur.updateFull();
+		cur = new LBlueBlock(blocks, full);
+	}
 
     public static BufferedImage resize(BufferedImage img, int newW, int newH) { 
         Image tmp = img.getScaledInstance(newW, newH, Image.SCALE_SMOOTH);
@@ -177,6 +168,7 @@ public class Background extends JPanel implements KeyListener{
 			cur.moveRight();
 		} else if (key == KeyEvent.VK_SPACE){
             cur.hardDrop();
+            newBlock();
        }
     }
 

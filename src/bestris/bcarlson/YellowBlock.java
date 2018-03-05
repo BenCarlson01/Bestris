@@ -1,6 +1,6 @@
 package bestris.bcarlson;
 
-public class YellowBlock implements Block4{
+public class YellowBlock extends Block4{
 	//Top Left Corner
 	//For Y values, 0 is top, 22 is bot
 	private Block[][] blocks;
@@ -79,19 +79,14 @@ public class YellowBlock implements Block4{
 	}
 	
 	public void hardDrop() {
-		int y1 = cur[5];
-		int y2 = cur[7];
-		while (y1 < 21 && !full[cur[4]][y1] && !full[cur[6]][y2]) {
-			y1 += 1;
-			y2 += 1;
-		}
 		System.arraycopy(cur, 0, prev, 0, 8);
-		cur[1] = y1 - 1;
-		cur[3] = y2 - 1;
-		cur[5] = y1;
-		cur[7] = y2;
+		while (cur[5] < 21 && !full[cur[0]][cur[5] + 1] && !full[cur[2]][cur[7] + 1]) {
+			cur[5] += 1;
+			cur[7] += 1;
+		}
+		cur[1] = cur[5] - 1;
+		cur[3] = cur[7] - 1;
 		updateColor();
-		updateFull();
 	}
 	
 	private void updateColor() {
