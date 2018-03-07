@@ -96,7 +96,7 @@ public class Background extends JPanel implements KeyListener{
 			return;
 		}
 		colorToBlock = Collections.unmodifiableMap(temp);
-		cur = new YellowBlock(blocks, full);
+		cur = getNewBlock();
 		time = 0;
 		timer = new Timer(10, new ActionListener() {
             @Override
@@ -142,7 +142,7 @@ public class Background extends JPanel implements KeyListener{
 		time = 0;
 		cur.updateFull();
 		clearLine();
-		cur = new LBlueBlock(blocks, full);
+		cur = getNewBlock();
 	}
 	
 	public void clearLine() {
@@ -166,6 +166,26 @@ public class Background extends JPanel implements KeyListener{
 					}
 				}
 			}
+		}
+	}
+	
+	public Block4 getNewBlock() {
+		int rand = (int) (Math.random() * 7);
+		switch (rand) {
+			case 0:
+				return new DBlueBlock(blocks, full);
+			case 1:
+				return new GreenBlock(blocks, full);
+			case 2:
+				return new LBlueBlock(blocks, full);
+			case 3:
+				return new OrangeBlock(blocks, full);
+			case 4:
+				return new PurpleBlock(blocks, full);
+			case 5:
+				return new RedBlock(blocks, full);
+			default:
+				return new YellowBlock(blocks, full);
 		}
 	}
 	
