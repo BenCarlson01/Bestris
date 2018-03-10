@@ -8,20 +8,22 @@ public class LBlueBlock extends Block4 {
 	private boolean[][] full;
 	private int[] cur;
 	private int[] prev;
+	private int turn;
 	
 	public LBlueBlock(Block[][] b, boolean[][] f) {
 		super(b, f);
 		full = f;
 		cur = new int[8];
 		prev = new int[8];
+		turn = 0;
 		cur[0] = 3;
-		cur[1] = 0;
+		cur[1] = 2;
 		cur[2] = 4;
-		cur[3] = 0;
+		cur[3] = 2;
 		cur[4] = 5;
-		cur[5] = 0;
+		cur[5] = 2;
 		cur[6] = 6;
-		cur[7] = 0;
+		cur[7] = 2;
 		System.arraycopy(cur, 0, prev, 0, 8);
 		setCurPrev(cur, prev);
 		updateColor(color);
@@ -32,8 +34,13 @@ public class LBlueBlock extends Block4 {
 			return;
 		}
 		System.arraycopy(cur, 0, prev, 0, 8);
-		double avgX = (cur[0] + cur[2] + cur[4] + cur[6]) / 4;
-		double avgY = (cur[1] + cur[3] + cur[5] + cur[7]) / 4;
+		double avgX = cur[2];
+		double avgY = cur[3];
+		if (turn == 0 || turn == 1) {
+			avgX = cur[4];
+			avgY = cur[5];
+		}
+		turn += 1;
 		cur[0] = (int) (-(prev[1] - avgY) + avgX);
 		cur[1] = (int) ((prev[0] - avgX) + avgY);
 		cur[2] = (int) (-(prev[3] - avgY) + avgX);

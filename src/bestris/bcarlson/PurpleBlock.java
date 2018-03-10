@@ -29,12 +29,12 @@ public class PurpleBlock extends Block4 {
 	}
 	
 	public void turnLeft() {
-		if (cur[2] <= 0 || cur[6] <= 0) {
+		if (cur[4] <= 0 || cur[4] >= 9) {
 			return;
 		}
 		System.arraycopy(cur, 0, prev, 0, 8);
-		double avgX = (cur[0] + cur[2] + cur[4] + cur[6]) / 4;
-		double avgY = (cur[1] + cur[3] + cur[5] + cur[7]) / 4;
+		double avgX = cur[4];
+		double avgY = cur[5];
 		cur[0] = (int) (-(prev[1] - avgY) + avgX);
 		cur[1] = (int) ((prev[0] - avgX) + avgY);
 		cur[2] = (int) (-(prev[3] - avgY) + avgX);
@@ -51,7 +51,7 @@ public class PurpleBlock extends Block4 {
 	}
 	
 	public void moveLeft() {
-		if (cur[0] <= 0 || cur[6] <= 0
+		if (cur[0] <= 0 || cur[2] <= 0 || cur[6] <= 0
 				|| full[cur[0] - 1][cur[1]] || full[cur[2] - 1][cur[3]]
 				|| full[cur[4] - 1][cur[5]] || full[cur[6] - 1][cur[7]]) {
 			return;
@@ -65,7 +65,7 @@ public class PurpleBlock extends Block4 {
 	}
 	
 	public void moveRight() {
-		if (cur[0] >= 9 || cur[6] >= 9
+		if (cur[0] >= 9 || cur[2] >= 9 || cur[6] >= 9
 				|| full[cur[0] + 1][cur[1]] || full[cur[2] + 1][cur[3]]
 				|| full[cur[4] + 1][cur[5]] || full[cur[6] + 1][cur[7]]) {
 			return;

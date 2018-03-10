@@ -143,7 +143,7 @@ public class Background extends JPanel implements KeyListener{
 		time = 0;
 		cur.updateFull(); 
 		clearLine();
-		cur = getNewBlock();
+		cur = new LBlueBlock(blocks, full);//getNewBlock();
 	}
 	
 	public void clearLine() {
