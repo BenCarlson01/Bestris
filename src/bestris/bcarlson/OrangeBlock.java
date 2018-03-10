@@ -1,7 +1,8 @@
 package bestris.bcarlson;
 
 public class OrangeBlock extends Block4 {
-	//BCBB
+	//BCB
+	//B
 	//For Y values, 0 is top, 22 is bot
 	private static final String color = "orange";
 	
@@ -20,8 +21,8 @@ public class OrangeBlock extends Block4 {
 		cur[3] = 0;
 		cur[4] = 5;
 		cur[5] = 0;
-		cur[6] = 6;
-		cur[7] = 0;
+		cur[6] = 3;
+		cur[7] = 1;
 		System.arraycopy(cur, 0, prev, 0, 8);
 		setCurPrev(cur, prev);
 		updateColor(color);

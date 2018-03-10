@@ -93,7 +93,7 @@ public class LBlueBlock extends Block4 {
 	
 	public void hardDrop() {
 		System.arraycopy(cur, 0, prev, 0, 8);
-		while (cur[3] < 21 
+		while (cur[1] < 21 && cur[7] < 21 
 				&& !full[cur[0]][cur[1] + 1] && !full[cur[2]][cur[3] + 1]
 				&& !full[cur[4]][cur[5] + 1] && !full[cur[6]][cur[7] + 1]) {
 			cur[1] += 1;

@@ -80,6 +80,7 @@ public class Background extends JPanel implements KeyListener{
 		for (int i = 0; i < 10; i++) {
 			for (int j = 0; j < 22; j++) {
 				full[i][j] = false;
+				
 			}
 		}
 		Map<String, BufferedImage> temp = new HashMap<>();
@@ -140,7 +141,7 @@ public class Background extends JPanel implements KeyListener{
 	
 	public void newBlock() {
 		time = 0;
-		cur.updateFull();
+		cur.updateFull(); 
 		clearLine();
 		cur = getNewBlock();
 	}
