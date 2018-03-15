@@ -36,9 +36,19 @@ public class LBlueBlock extends Block4 {
 		System.arraycopy(cur, 0, prev, 0, 8);
 		double avgX = cur[2];
 		double avgY = cur[3];
-		if (turn == 0 || turn == 1) {
-			avgX = cur[4];
-			avgY = cur[5];
+		switch (turn) {
+			case 0:
+				avgX += 0.5;
+				break;
+			case 1:
+				avgY -= 0.5;
+				break;
+			case 2:
+				avgX -= 0.5;
+				break;
+			default:
+				avgY += 0.5;
+				break;
 		}
 		turn += 1;
 		cur[0] = (int) (-(prev[1] - avgY) + avgX);

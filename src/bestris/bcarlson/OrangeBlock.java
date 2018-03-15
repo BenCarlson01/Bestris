@@ -1,8 +1,8 @@
 package bestris.bcarlson;
 
 public class OrangeBlock extends Block4 {
+	//  B
 	//BCB
-	//B
 	//For Y values, 0 is top, 22 is bot
 	private static final String color = "orange";
 	
@@ -15,13 +15,13 @@ public class OrangeBlock extends Block4 {
 		full = f;
 		cur = new int[8];
 		prev = new int[8];
-		cur[0] = 3;
+		cur[0] = 5;
 		cur[1] = 0;
-		cur[2] = 4;
-		cur[3] = 0;
-		cur[4] = 5;
-		cur[5] = 0;
-		cur[6] = 3;
+		cur[2] = 3;
+		cur[3] = 1;
+		cur[4] = 4;
+		cur[5] = 1;
+		cur[6] = 5;
 		cur[7] = 1;
 		System.arraycopy(cur, 0, prev, 0, 8);
 		setCurPrev(cur, prev);
@@ -33,8 +33,8 @@ public class OrangeBlock extends Block4 {
 			return;
 		}
 		System.arraycopy(cur, 0, prev, 0, 8);
-		double avgX = (cur[0] + cur[2] + cur[4] + cur[6]) / 4;
-		double avgY = (cur[1] + cur[3] + cur[5] + cur[7]) / 4;
+		double avgX = cur[4];
+		double avgY = cur[5];
 		cur[0] = (int) (-(prev[1] - avgY) + avgX);
 		cur[1] = (int) ((prev[0] - avgX) + avgY);
 		cur[2] = (int) (-(prev[3] - avgY) + avgX);
@@ -94,7 +94,7 @@ public class OrangeBlock extends Block4 {
 	
 	public void hardDrop() {
 		System.arraycopy(cur, 0, prev, 0, 8);
-		while (cur[3] < 21 
+		while (cur[1] < 21 && cur[7] < 21
 				&& !full[cur[0]][cur[1] + 1] && !full[cur[2]][cur[3] + 1]
 				&& !full[cur[4]][cur[5] + 1] && !full[cur[6]][cur[7] + 1]) {
 			cur[1] += 1;

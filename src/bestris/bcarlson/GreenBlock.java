@@ -1,8 +1,8 @@
 package bestris.bcarlson;
 
 public class GreenBlock extends Block4 {
-	// CB
-	//BB
+	// BB
+	//BC
 	//For Y values, 0 is top, 22 is bot
 	private static final String color = "green";
 	
@@ -33,8 +33,8 @@ public class GreenBlock extends Block4 {
 			return;
 		}
 		System.arraycopy(cur, 0, prev, 0, 8);
-		double avgX = (cur[0] + cur[2] + cur[4] + cur[6]) / 4;
-		double avgY = (cur[1] + cur[3] + cur[5] + cur[7]) / 4;
+		double avgX = cur[6];
+		double avgY = cur[7];
 		cur[0] = (int) (-(prev[1] - avgY) + avgX);
 		cur[1] = (int) ((prev[0] - avgX) + avgY);
 		cur[2] = (int) (-(prev[3] - avgY) + avgX);
@@ -94,7 +94,7 @@ public class GreenBlock extends Block4 {
 	
 	public void hardDrop() {
 		System.arraycopy(cur, 0, prev, 0, 8);
-		while (cur[3] < 21 
+		while (cur[3] < 21 && cur[5] < 21 
 				&& !full[cur[0]][cur[1] + 1] && !full[cur[2]][cur[3] + 1]
 				&& !full[cur[4]][cur[5] + 1] && !full[cur[6]][cur[7] + 1]) {
 			cur[1] += 1;
