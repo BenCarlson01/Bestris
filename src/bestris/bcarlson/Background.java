@@ -64,7 +64,7 @@ public class Background extends JPanel implements KeyListener{
 	private Block[][] blocks;
 	private boolean[][] full;
 	private Block4 cur;
-	private int speed = 30; // 1000 / speed milliseconds
+	private int speed = 10; // 1000 / speed milliseconds
 	private int time;
 	private Timer timer;
 	
