@@ -67,22 +67,12 @@ public class Background extends JPanel implements KeyListener{
 	private int speed = 10; // 1000 / speed milliseconds
 	private int time;
 	private Timer timer;
+	private NextBlocks next;
 	
-	public Background() {
-		blocks = new Block[10][22];
-		for (int i = 0; i < 10; i++) {
-			for (int j = 0; j < 22; j++) {
-				blocks[i][j] = new Block();
-				blocks[i][j].setColor("clear");
-			}
-		}
-		full = new boolean[10][22];
-		for (int i = 0; i < 10; i++) {
-			for (int j = 0; j < 22; j++) {
-				full[i][j] = false;
-				
-			}
-		}
+	public Background(Block[][] blocks, boolean[][] full, NextBlocks next) {
+		this.blocks = blocks;
+		this.full = full;
+		this.next = next;
 		Map<String, BufferedImage> temp = new HashMap<>();
 		try {
 			temp.put("red", resize(ImageIO.read(new File("art/Red Tetris Block.png")), 25, 25));
@@ -97,7 +87,7 @@ public class Background extends JPanel implements KeyListener{
 			return;
 		}
 		colorToBlock = Collections.unmodifiableMap(temp);
-		cur = getNewBlock();
+		cur = next.getNextBlock();
 		time = 0;
 		timer = new Timer(10, new ActionListener() {
             @Override
@@ -143,7 +133,7 @@ public class Background extends JPanel implements KeyListener{
 		time = 0;
 		cur.updateFull(); 
 		clearLine();
-		cur = new PurpleBlock(blocks, full); //getNewBlock();
+		cur = next.getNextBlock(); //new PurpleBlock(blocks, full); 
 	}
 	
 	public void clearLine() {
@@ -167,26 +157,6 @@ public class Background extends JPanel implements KeyListener{
 					}
 				}
 			}
-		}
-	}
-	
-	public Block4 getNewBlock() {
-		int rand = (int) (Math.random() * 7);
-		switch (rand) {
-			case 0:
-				return new DBlueBlock(blocks, full);
-			case 1:
-				return new GreenBlock(blocks, full);
-			case 2:
-				return new LBlueBlock(blocks, full);
-			case 3:
-				return new OrangeBlock(blocks, full);
-			case 4:
-				return new PurpleBlock(blocks, full);
-			case 5:
-				return new RedBlock(blocks, full);
-			default:
-				return new YellowBlock(blocks, full);
 		}
 	}
 	

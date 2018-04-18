@@ -49,4 +49,7 @@ public abstract class Block4 {
 		full[cur[4]][cur[5]] = true;
 		full[cur[6]][cur[7]] = true;
 	}
+	
+	
+	
 }
