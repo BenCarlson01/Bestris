@@ -1,6 +1,6 @@
 package bestris.bcarlson;
 
-public abstract class Block4 {
+public class Block4 {
 	private String color;
 	private Block[][] blocks;
 	private boolean[][] full;
@@ -25,12 +25,45 @@ public abstract class Block4 {
 		prev = p;
 	}
 	
-	public abstract void moveLeft();
-	public abstract void moveRight();
-	public abstract void moveDown();
-	public abstract void hardDrop();
+	public void moveLeft() {
+		System.arraycopy(cur, 0, prev, 0, 8);
+		moveBlock(-1, 0);
+		if (invalidMove()) {
+			System.arraycopy(prev, 0, cur, 0, 8);
+		}
+		updateColor();
+	}
 	
-	protected void updateColor(String color) {
+	public void moveRight() {
+		System.arraycopy(cur, 0, prev, 0, 8);
+		moveBlock(1, 0);
+		if (invalidMove()) {
+			System.arraycopy(prev, 0, cur, 0, 8);
+		}
+		updateColor();
+	}
+	
+	public void moveDown() {
+		System.arraycopy(cur, 0, prev, 0, 8);
+		moveBlock(0, 1);
+		if (invalidMove()) {
+			System.arraycopy(prev, 0, cur, 0, 8);
+		}
+		updateColor();
+	}
+	
+	public void hardDrop() {
+		System.arraycopy(cur, 0, prev, 0, 8);
+		int[] temp = new int[8];
+		while (!invalidMove()) {
+			System.arraycopy(cur, 0, temp, 0, 8);
+			moveBlock(0, 1);
+		}
+		System.arraycopy(temp, 0, cur, 0, 8);
+		updateColor();
+	}
+	
+	protected void updateColor() {
 		for (int i = 0; i < 8; i += 2) {
 			blocks[prev[i]][prev[i + 1]].setColor("clear"); 
 		}
@@ -186,8 +219,12 @@ public abstract class Block4 {
 		}
 		turn += 1;
 		turn %= 4;
-		updateColor(color);
+		updateColor();
 		
+	}
+	
+	public void turnLeft() {
+		//Currently does nothing
 	}
 	
 	public boolean invalidMove() {

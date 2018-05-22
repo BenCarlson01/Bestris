@@ -26,7 +26,7 @@ public class LBlueBlock extends Block4 {
 		cur[7] = 2;
 		System.arraycopy(cur, 0, prev, 0, 8);
 		setCurPrev(cur, prev);
-		updateColor(color);
+		updateColor();
 	}
 	
 	public void turnLeft() {
@@ -78,65 +78,10 @@ public class LBlueBlock extends Block4 {
 				break;
 		}
 		turn += 1;
-		updateColor(color);
+		updateColor();
 	}
 	
 	public void turnRight() {
 		//Does nothing
-	}
-	
-	public void moveLeft() {
-		if (cur[0] <= 0 || cur[6] <= 0
-				|| full[cur[0] - 1][cur[1]] || full[cur[2] - 1][cur[3]]
-				|| full[cur[4] - 1][cur[5]] || full[cur[6] - 1][cur[7]]) {
-			return;
-		}
-		System.arraycopy(cur, 0, prev, 0, 8);
-		cur[0] -= 1;
-		cur[2] -= 1;
-		cur[4] -= 1;
-		cur[6] -= 1;
-		updateColor(color);
-	}
-	
-	public void moveRight() {
-		if (cur[0] >= 9 || cur[6] >= 9
-				|| full[cur[0] + 1][cur[1]] || full[cur[2] + 1][cur[3]]
-				|| full[cur[4] + 1][cur[5]] || full[cur[6] + 1][cur[7]]) {
-			return;
-		}
-		System.arraycopy(cur, 0, prev, 0, 8);
-		cur[0] += 1;
-		cur[2] += 1;
-		cur[4] += 1;
-		cur[6] += 1;
-		updateColor(color);
-	}
-	
-	public void moveDown() {
-		if (cur[1] >= 21 || cur[7] >= 21
-				|| full[cur[0]][cur[1] + 1] || full[cur[2]][cur[3] + 1]
-				|| full[cur[4]][cur[5] + 1] || full[cur[6]][cur[7] + 1]) {
-			return;
-		}
-		System.arraycopy(cur, 0, prev, 0, 8);
-		cur[1] += 1;
-		cur[3] += 1;
-		cur[5] += 1;
-		cur[7] += 1;
-		updateColor(color);
-	}
-	
-	public void hardDrop() {
-		System.arraycopy(cur, 0, prev, 0, 8);
-		while (cur[1] < 21 && cur[7] < 21 
-				&& !full[cur[0]][cur[1] + 1] && !full[cur[2]][cur[3] + 1]
-				&& !full[cur[4]][cur[5] + 1] && !full[cur[6]][cur[7] + 1]) {
-			cur[1] += 1;
-			cur[3] += 1;
-			cur[5] += 1;
-			cur[7] += 1;
-		}
-		updateColor(color);
 	}
 }
