@@ -12,7 +12,7 @@ public class PurpleBlock extends Block4 {
 	private int turn;
 	
 	public PurpleBlock(Block[][] b, boolean[][] f) {
-		super(b, f);
+		super(b, f, color);
 		full = f;
 		turn = 0;
 		cur = new int[8];
@@ -43,166 +43,10 @@ public class PurpleBlock extends Block4 {
 		cur[6] = (int) (-(prev[7] - avgY) + avgX);
 		cur[7] = (int) ((prev[6] - avgX) + avgY);
 		switch (turn) {
-			case 0:
-				if (notValidMove()) {
-					cur[0] -= 1;
-					cur[2] -= 1;
-					cur[4] -= 1;
-					cur[6] -= 1;
-				}
-				if (notValidMove()) {
-					cur[0] -= 1;
-					cur[2] -= 1;
-					cur[4] -= 1;
-					cur[6] -= 1;
-					cur[1] += 1;
-					cur[3] += 1;
-					cur[5] += 1;
-					cur[7] += 1;
-				}
-				if (notValidMove()) {
-					cur[1] -= 2;
-					cur[3] -= 2;
-					cur[5] -= 2;
-					cur[7] -= 2;
-				}
-				if (notValidMove()) {
-					cur[0] -= 1;
-					cur[2] -= 1;
-					cur[4] -= 1;
-					cur[6] -= 1;
-					cur[1] -= 2;
-					cur[3] -= 2;
-					cur[5] -= 2;
-					cur[7] -= 2;
-				}
-				if (notValidMove()) {
-					System.arraycopy(prev, 0, cur, 0, 8);
-					return;
-				}
-				break;
-			case 1:
-				if (notValidMove()) {
-					cur[0] += 1;
-					cur[2] += 1;
-					cur[4] += 1;
-					cur[6] += 1;
-				}
-				if (notValidMove()) {
-					cur[0] += 1;
-					cur[2] += 1;
-					cur[4] += 1;
-					cur[6] += 1;
-					cur[1] -= 1;
-					cur[3] -= 1;
-					cur[5] -= 1;
-					cur[7] -= 1;
-				}
-				if (notValidMove()) {
-					cur[1] += 2;
-					cur[3] += 2;
-					cur[5] += 2;
-					cur[7] += 2;
-				}
-				if (notValidMove()) {
-					cur[0] += 1;
-					cur[2] += 1;
-					cur[4] += 1;
-					cur[6] += 1;
-					cur[1] += 2;
-					cur[3] += 2;
-					cur[5] += 2;
-					cur[7] += 2;
-				}
-				if (notValidMove()) {
-					System.arraycopy(prev, 0, cur, 0, 8);
-					return;
-				}
-				break;
-			case 2:
-				if (notValidMove()) {
-					cur[0] += 1;
-					cur[2] += 1;
-					cur[4] += 1;
-					cur[6] += 1;
-				}
-				if (notValidMove()) {
-					cur[0] += 1;
-					cur[2] += 1;
-					cur[4] += 1;
-					cur[6] += 1;
-					cur[1] += 1;
-					cur[3] += 1;
-					cur[5] += 1;
-					cur[7] += 1;
-				}
-				if (notValidMove()) {
-					cur[1] -= 2;
-					cur[3] -= 2;
-					cur[5] -= 2;
-					cur[7] -= 2;
-				}
-				if (notValidMove()) {
-					cur[0] += 1;
-					cur[2] += 1;
-					cur[4] += 1;
-					cur[6] += 1;
-					cur[1] -= 2;
-					cur[3] -= 2;
-					cur[5] -= 2;
-					cur[7] -= 2;
-				}
-				if (notValidMove()) {
-					System.arraycopy(prev, 0, cur, 0, 8);
-					return;
-				}
-				break;
-			default:
-				if (notValidMove()) {
-					cur[0] -= 1;
-					cur[2] -= 1;
-					cur[4] -= 1;
-					cur[6] -= 1;
-				}
-				if (notValidMove()) {
-					cur[0] -= 1;
-					cur[2] -= 1;
-					cur[4] -= 1;
-					cur[6] -= 1;
-					cur[1] -= 1;
-					cur[3] -= 1;
-					cur[5] -= 1;
-					cur[7] -= 1;
-				}
-				if (notValidMove()) {
-					cur[1] += 2;
-					cur[3] += 2;
-					cur[5] += 2;
-					cur[7] += 2;
-				}
-				if (notValidMove()) {
-					cur[0] -= 1;
-					cur[2] -= 1;
-					cur[4] -= 1;
-					cur[6] -= 1;
-					cur[1] += 2;
-					cur[3] += 2;
-					cur[5] += 2;
-					cur[7] += 2;
-				}
-				if (notValidMove()) {
-					System.arraycopy(prev, 0, cur, 0, 8);
-					return;
-				}
-				turn = -1;
-				break;
+			
 		}
 		turn += 1;
 		updateColor(color);
-	}
-	
-	public void turnRight() {
-		//Does nothing
 	}
 	
 	private boolean notValidMove() {

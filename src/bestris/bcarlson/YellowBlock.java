@@ -9,7 +9,7 @@ public class YellowBlock extends Block4{
 	private int[] prev;
 	
 	public YellowBlock(Block[][] b, boolean[][] f) {
-		super(b, f);
+		super(b, f, color);
 		full = f;
 		cur = new int[8];
 		prev = new int[8];

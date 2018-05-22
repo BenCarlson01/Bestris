@@ -11,7 +11,7 @@ public class LBlueBlock extends Block4 {
 	private int turn;
 	
 	public LBlueBlock(Block[][] b, boolean[][] f) {
-		super(b, f);
+		super(b, f, color);
 		full = f;
 		cur = new int[8];
 		prev = new int[8];

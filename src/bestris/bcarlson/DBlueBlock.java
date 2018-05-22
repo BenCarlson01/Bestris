@@ -11,7 +11,7 @@ public class DBlueBlock extends Block4 {
 	private int[] prev;
 	
 	public DBlueBlock(Block[][] b, boolean[][] f) {
-		super(b, f);
+		super(b, f, color);
 		full = f;
 		cur = new int[8];
 		prev = new int[8];
@@ -44,10 +44,6 @@ public class DBlueBlock extends Block4 {
 		cur[6] = (int) (-(prev[7] - avgY) + avgX);
 		cur[7] = (int) ((prev[6] - avgX) + avgY);
 		updateColor(color);
-	}
-	
-	public void turnRight() {
-		//Does nothing
 	}
 	
 	public void moveLeft() {
