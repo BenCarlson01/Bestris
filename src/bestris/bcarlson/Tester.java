@@ -29,10 +29,10 @@ public class Tester {
 	}
 	
 	@Test
-	public void testLBlueBlock() {
+	public void testIBlock() {
 		Block[][] blocks = createBlocks();
 		boolean[][] full = createFull();
-		Block4 cur = new LBlueBlock(blocks, full);
+		Block4 cur = new IBlock(blocks, full);
 		//Test Move Down
 		for (int i = 0; i < 20; i++) {
 			cur.moveDown();
@@ -44,7 +44,7 @@ public class Tester {
 		assertTrue(full[6][21]);
 		
 		//Test Hard Drop
-		cur = new LBlueBlock(blocks, full);
+		cur = new IBlock(blocks, full);
 		cur.hardDrop();
 		cur.updateFull();
 		assertTrue(full[3][20]);

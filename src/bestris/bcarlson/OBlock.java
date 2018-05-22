@@ -1,13 +1,13 @@
 package bestris.bcarlson;
 
-public class YellowBlock extends Block4{
+public class OBlock extends Block4{
 	private static final String color = "yellow";
 	//Top Left Corner
 	//For Y values, 0 is top, 22 is bot
 	private int[] cur;
 	private int[] prev;
 	
-	public YellowBlock(Block[][] b, boolean[][] f) {
+	public OBlock(Block[][] b, boolean[][] f) {
 		super(b, f, color);
 		cur = new int[8];
 		prev = new int[8];

@@ -94,7 +94,6 @@ public class Background extends JPanel implements KeyListener{
             public void actionPerformed(ActionEvent e) {
                 repaint();
             }
-
         });
         timer.setRepeats(true);
         timer.setCoalesce(true);
@@ -180,7 +179,9 @@ public class Background extends JPanel implements KeyListener{
     	int key = event.getKeyCode();
 		if (key == KeyEvent.VK_UP) {
 			cur.turnRight();
-		} else if (key == KeyEvent.VK_DOWN) {
+		} else if (key == KeyEvent.VK_ALT) {
+			cur.turnLeft();
+    	} else if (key == KeyEvent.VK_DOWN) {
 			cur.moveDown();
 		} else if (key == KeyEvent.VK_LEFT) {
 			cur.moveLeft();

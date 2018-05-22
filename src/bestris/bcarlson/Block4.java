@@ -45,7 +45,7 @@ public class Block4 {
 	
 	public void moveDown() {
 		System.arraycopy(cur, 0, prev, 0, 8);
-		moveBlock(0, 1);
+		moveBlock(0, -1);
 		if (invalidMove()) {
 			System.arraycopy(prev, 0, cur, 0, 8);
 		}
@@ -57,7 +57,7 @@ public class Block4 {
 		int[] temp = new int[8];
 		while (!invalidMove()) {
 			System.arraycopy(cur, 0, temp, 0, 8);
-			moveBlock(0, 1);
+			moveBlock(0, -1);
 		}
 		System.arraycopy(temp, 0, cur, 0, 8);
 		updateColor();
@@ -91,17 +91,17 @@ public class Block4 {
 	}
 	
 	/*
-	 * Moves a Block4 x spaces to the right and y spaces up
+	 * Moves a Block4 x spaces to the right and y spaces down
 	 */
 	public void moveBlock(int x, int y) {
 		cur[0] += x;
 		cur[2] += x;
 		cur[4] += x;
 		cur[6] += x;
-		cur[1] += y;
-		cur[3] += y;
-		cur[5] += y;
-		cur[7] += y;
+		cur[1] -= y;
+		cur[3] -= y;
+		cur[5] -= y;
+		cur[7] -= y;
 	}
 	
 	/*
@@ -223,8 +223,121 @@ public class Block4 {
 		
 	}
 	
+	/*
+	 * Turns a Block4 left
+	 */
 	public void turnLeft() {
-		//Currently does nothing
+		System.arraycopy(cur, 0, prev, 0, 8);
+		//initial turn
+		double avgX = cur[2];
+		double avgY = cur[3];
+		cur[0] = (int) ((prev[1] - avgY) + avgX);
+		cur[1] = (int) (-(prev[0] - avgX) + avgY);
+		cur[2] = (int) ((prev[3] - avgY) + avgX);
+		cur[3] = (int) (-(prev[2] - avgX) + avgY);
+		cur[4] = (int) ((prev[5] - avgY) + avgX);
+		cur[5] = (int) (-(prev[4] - avgX) + avgY);
+		cur[6] = (int) ((prev[7] - avgY) + avgX);
+		cur[7] = (int) (-(prev[6] - avgX) + avgY);
+		
+		//Keep temp of turn
+		int[] temp = new int[8];
+		System.arraycopy(cur, 0, temp, 0, 8);
+		
+		//check for collisions
+		switch (turn) {
+		case 0:
+			if (invalidMove()) {
+				moveBlock(1, 0);
+			}
+			if (invalidMove()) {
+				System.arraycopy(temp, 0, cur, 0, 8);
+				moveBlock(1, 1);
+			}
+			if (invalidMove()) {
+				System.arraycopy(temp, 0, cur, 0, 8);
+				moveBlock(0, -2);
+			}
+			if (invalidMove()) {
+				System.arraycopy(temp, 0, cur, 0, 8);
+				moveBlock(1, -2);
+			}
+			if (invalidMove()) {
+				System.arraycopy(prev, 0, cur, 0, 8);
+				turn += 1;
+			}
+			break;
+		case 1:
+			if (invalidMove()) {
+				moveBlock(1, 0);
+			}
+			if (invalidMove()) {
+				System.arraycopy(temp, 0, cur, 0, 8);
+				moveBlock(1, -1);
+			}
+			if (invalidMove()) {
+				System.arraycopy(temp, 0, cur, 0, 8);
+				moveBlock(0, 2);
+			}
+			if (invalidMove()) {
+				System.arraycopy(temp, 0, cur, 0, 8);
+				moveBlock(1, 2);
+			}
+			if (invalidMove()) {
+				System.arraycopy(prev, 0, cur, 0, 8);
+				turn += 1;
+			}
+			break;
+		case 2:
+			if (invalidMove()) {
+				moveBlock(-1, 0);
+			}
+			if (invalidMove()) {
+				System.arraycopy(temp, 0, cur, 0, 8);
+				moveBlock(-1, 1);
+			}
+			if (invalidMove()) {
+				System.arraycopy(temp, 0, cur, 0, 8);
+				moveBlock(0, -2);
+			}
+			if (invalidMove()) {
+				System.arraycopy(temp, 0, cur, 0, 8);
+				moveBlock(-1, -2);
+			}
+			if (invalidMove()) {
+				System.arraycopy(prev, 0, cur, 0, 8);
+				turn += 1;
+			}
+			break;
+		case 3:
+			if (invalidMove()) {
+				moveBlock(-1, 0);
+			}
+			if (invalidMove()) {
+				System.arraycopy(temp, 0, cur, 0, 8);
+				moveBlock(-1, -1);
+			}
+			if (invalidMove()) {
+				System.arraycopy(temp, 0, cur, 0, 8);
+				moveBlock(0, 2);
+			}
+			if (invalidMove()) {
+				System.arraycopy(temp, 0, cur, 0, 8);
+				moveBlock(-1, 2);
+			}
+			if (invalidMove()) {
+				System.arraycopy(prev, 0, cur, 0, 8);
+				turn += 1;
+			}
+			break;
+		default:
+			System.out.println("Error - Impossible turn case");
+			break;
+		}
+		turn -= 1;
+		turn = ((turn % 4) + 4) % 4;
+		turn %= 4;
+		updateColor();
 	}
 	
 	public boolean invalidMove() {
