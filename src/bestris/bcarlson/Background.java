@@ -80,6 +80,7 @@ public class Background extends JPanel implements KeyListener{
 			temp.put("green", HelperMethods.resize(ImageIO.read(new File("art/Green Tetris Block.png")), 25, 25));
 			temp.put("yellow", HelperMethods.resize(ImageIO.read(new File("art/Yellow Tetris Block.png")), 25, 25));
 			temp.put("orange", HelperMethods.resize(ImageIO.read(new File("art/Orange Tetris Block.png")), 25, 25));
+			temp.put("ghost", HelperMethods.resize(ImageIO.read(new File("art/G.png")), 25, 25));
 		} catch (IOException e) {
 			System.out.println("IOError");
 			return;

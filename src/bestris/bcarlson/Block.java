@@ -6,7 +6,7 @@ import java.util.Set;
 
 public class Block {
 	private static final String[] SET_VALUES =
-			new String[] {"red", "green", "dblue", "orange", "yellow", "purple", "lblue", "clear" };
+			new String[] {"red", "green", "dblue", "orange", "yellow", "purple", "lblue", "clear", "ghost" };
 	private final Set<String> COLORS = new HashSet<>(Arrays.asList(SET_VALUES));
 	private String color;
 	private boolean visible;

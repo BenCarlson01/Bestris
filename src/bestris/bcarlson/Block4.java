@@ -6,6 +6,8 @@ public class Block4 {
 	private boolean[][] full;
 	private int[] cur;
 	private int[] prev;
+	private int[] ghost;
+	private int[] prevGhost;
 	private int turn;
 	
 	/*
@@ -18,8 +20,15 @@ public class Block4 {
 		full = f;
 		color = c;
 		turn = 0;
+		
+		ghost = new int[8];
+		prevGhost = new int[8];
 	}
 	
+	/*
+	 * Must be called to initialize Block4
+	 * Creates arrays that represent current and previous positions of blocks
+	 */
 	public void setCurPrev(int[] c, int[] p) {
 		cur = c;
 		prev = p;
@@ -66,6 +75,13 @@ public class Block4 {
 	protected void updateColor() {
 		for (int i = 0; i < 8; i += 2) {
 			blocks[prev[i]][prev[i + 1]].setColor("clear"); 
+		}
+		updateGhost();
+		for (int i = 0; i < 8; i += 2) {
+			blocks[prevGhost[i]][prevGhost[i + 1]].setColor("clear"); 
+		}
+		for (int i = 0; i < 8; i += 2) {
+			blocks[ghost[i]][ghost[i + 1]].setColor("ghost"); 
 		}
 		for (int i = 0; i < 8; i += 2) {	
 			blocks[cur[i]][cur[i + 1]].setColor(color); 
@@ -338,6 +354,34 @@ public class Block4 {
 		turn = ((turn % 4) + 4) % 4;
 		turn %= 4;
 		updateColor();
+	}
+	
+	private void updateGhost() {
+		System.arraycopy(ghost, 0, prevGhost, 0, 8);
+		System.arraycopy(cur, 0, ghost, 0, 8);
+		int[] temp = new int[8];
+		while (!invalidGhostMove()) {
+			System.arraycopy(ghost, 0, temp, 0, 8);
+			moveGhost();
+		}
+		System.arraycopy(temp, 0, ghost, 0, 8);
+	}
+	
+	private void moveGhost() {
+		ghost[1] += 1;
+		ghost[3] += 1;
+		ghost[5] += 1;
+		ghost[7] += 1;
+	}
+	
+	private boolean invalidGhostMove() {
+		for (int i = 1; i < ghost.length; i += 2) {
+			if (ghost[i] > 21) {
+				return true;
+			}
+		}
+		return full[ghost[0]][ghost[1]] || full[ghost[2]][ghost[3]]
+				|| full[ghost[4]][ghost[5]] || full[ghost[6]][ghost[7]];
 	}
 	
 	public boolean invalidMove() {

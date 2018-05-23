@@ -18,15 +18,15 @@ public class BlockPreview extends JPanel{
 	private String[][] blocks;
 	
 	public BlockPreview() {
-		setPreferredSize( new Dimension( 60, 60 ) );
+		setPreferredSize(new Dimension(60, 60));
 		Map<String, BufferedImage> temp = new HashMap<>();
 		try {
 			temp.put("Z", HelperMethods.resize(ImageIO.read(new File("art/Red Tetris Block.png")), 12, 12));
 			temp.put("I", HelperMethods.resize(ImageIO.read(new File("art/LBlue Tetris Block.png")), 10, 10));
 			temp.put("J", HelperMethods.resize(ImageIO.read(new File("art/DBlue Tetris Block.png")), 12, 12));
 			temp.put("T", HelperMethods.resize(ImageIO.read(new File("art/Purple Tetris Block.png")), 12, 12));
-			temp.put("S", HelperMethods.resize(ImageIO.read(new File("art/Green Tetris Block.png")), 10, 10));
-			temp.put("O", HelperMethods.resize(ImageIO.read(new File("art/Yellow Tetris Block.png")), 12, 12));
+			temp.put("S", HelperMethods.resize(ImageIO.read(new File("art/Green Tetris Block.png")), 12, 12));
+			temp.put("O", HelperMethods.resize(ImageIO.read(new File("art/Yellow Tetris Block.png")), 10, 10));
 			temp.put("L", HelperMethods.resize(ImageIO.read(new File("art/Orange Tetris Block.png")), 12, 12));
 			temp.put("C1", HelperMethods.resize(ImageIO.read(new File("art/C.png")), 12, 12));
 			temp.put("C2", HelperMethods.resize(ImageIO.read(new File("art/C.png")), 10, 10));
