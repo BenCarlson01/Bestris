@@ -2,8 +2,6 @@ package bestris.bcarlson;
 
 import java.awt.Dimension;
 import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
@@ -75,13 +73,13 @@ public class Background extends JPanel implements KeyListener{
 		this.next = next;
 		Map<String, BufferedImage> temp = new HashMap<>();
 		try {
-			temp.put("red", resize(ImageIO.read(new File("art/Red Tetris Block.png")), 25, 25));
-			temp.put("lblue", resize(ImageIO.read(new File("art/LBlue Tetris Block.png")), 25, 25));
-			temp.put("dblue", resize(ImageIO.read(new File("art/DBlue Tetris Block.png")), 25, 25));
-			temp.put("purple", resize(ImageIO.read(new File("art/Purple Tetris Block.png")), 25, 25));
-			temp.put("green", resize(ImageIO.read(new File("art/Green Tetris Block.png")), 25, 25));
-			temp.put("yellow", resize(ImageIO.read(new File("art/Yellow Tetris Block.png")), 25, 25));
-			temp.put("orange", resize(ImageIO.read(new File("art/Orange Tetris Block.png")), 25, 25));
+			temp.put("red", HelperMethods.resize(ImageIO.read(new File("art/Red Tetris Block.png")), 25, 25));
+			temp.put("lblue", HelperMethods.resize(ImageIO.read(new File("art/LBlue Tetris Block.png")), 25, 25));
+			temp.put("dblue", HelperMethods.resize(ImageIO.read(new File("art/DBlue Tetris Block.png")), 25, 25));
+			temp.put("purple", HelperMethods.resize(ImageIO.read(new File("art/Purple Tetris Block.png")), 25, 25));
+			temp.put("green", HelperMethods.resize(ImageIO.read(new File("art/Green Tetris Block.png")), 25, 25));
+			temp.put("yellow", HelperMethods.resize(ImageIO.read(new File("art/Yellow Tetris Block.png")), 25, 25));
+			temp.put("orange", HelperMethods.resize(ImageIO.read(new File("art/Orange Tetris Block.png")), 25, 25));
 		} catch (IOException e) {
 			System.out.println("IOError");
 			return;
@@ -162,17 +160,6 @@ public class Background extends JPanel implements KeyListener{
 	public int updateScore(int amt) {
 		return amt;
 	}
-
-    public static BufferedImage resize(BufferedImage img, int newW, int newH) { 
-        Image tmp = img.getScaledInstance(newW, newH, Image.SCALE_SMOOTH);
-        BufferedImage dimg = new BufferedImage(newW, newH, BufferedImage.TYPE_INT_ARGB);
-
-        Graphics2D g2d = dimg.createGraphics();
-        g2d.drawImage(tmp, 0, 0, null);
-        g2d.dispose();
-
-        return dimg;
-    } 
 
     /** Handle the key-pressed event from the text field. */
     public void keyPressed(KeyEvent event) {

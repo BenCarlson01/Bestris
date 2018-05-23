@@ -1,8 +1,11 @@
 package bestris.bcarlson;
 
 import java.awt.BorderLayout;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
 
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 
 public class Main {
 	
@@ -12,7 +15,7 @@ public class Main {
 	public static void main(String[] args) {
 		JFrame frame = new JFrame("Bestris");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setLayout(new BorderLayout());
+        frame.setLayout(new GridBagLayout());
 
 		Block[][] blocks = new Block[10][22];
 		for (int i = 0; i < 10; i++) {
@@ -32,8 +35,14 @@ public class Main {
         Background back = new Background(blocks, full, next);
 		back.addKeyListener(back);
         back.setFocusable(true);
-        frame.add(back, BorderLayout.CENTER);
-        frame.add(next, BorderLayout.LINE_END);
+        GridBagConstraints c = new GridBagConstraints();
+        c.fill = GridBagConstraints.VERTICAL;
+        c.gridx = 0;
+        c.gridy = 0;
+        frame.add(back, c);
+        c.gridx = 1;
+        c.gridy = 0;
+        frame.add(next, c);
         frame.pack();
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);

@@ -1,10 +1,6 @@
 package bestris.bcarlson;
 
-import java.awt.Graphics;
-import java.io.File;
-import java.io.IOException;
-
-import javax.imageio.ImageIO;
+import java.awt.GridLayout;
 import javax.swing.JPanel;
 
 public class NextBlocks extends JPanel {
@@ -12,15 +8,22 @@ public class NextBlocks extends JPanel {
 	private char[] nextBlock;
 	private Block[][] blocks;
 	private boolean[][] full;
+	private BlockPreview[] prevs;
 	
 	public NextBlocks(Block[][] blocks, boolean[][] full) {
+		setLayout(new GridLayout(5, 1));
 		this.blocks = blocks;
 		this.full = full;
 		nextBlock = new char[5];
 		for (int i = 0; i < nextBlock.length; i++) {
 			nextBlock[i] = getNewBlock();
 		}
-		repaint();
+		prevs = new BlockPreview[5];
+		for (int i = 0; i < prevs.length; i++) {
+			prevs[i] = new BlockPreview();
+			prevs[i].displayBlock(nextBlock[i]);
+			add(prevs[i]);
+		}
 	}
 	
 	public Block4 getNextBlock() {
@@ -29,7 +32,9 @@ public class NextBlocks extends JPanel {
 			nextBlock[i] = nextBlock[i + 1];
 		}
 		nextBlock[nextBlock.length - 1] = getNewBlock();
-		repaint();
+		for (int i = 0; i < prevs.length; i++) {
+			prevs[i].displayBlock(nextBlock[i]);
+		}
 		return getCorrespondingBlock(ret);
 	}
 	
@@ -75,21 +80,7 @@ public class NextBlocks extends JPanel {
 		default:
 			System.out.println("Error in block generation");
 			return new TBlock(blocks, full);
+		}
 	}
-	}
-	
-	@Override
-    protected void paintComponent(Graphics g) {
-        super.paintComponent(g);
-        
-        for (int i = 0; i < nextBlock.length; i++) {
-        	try {
-        		g.drawImage(Background.resize(ImageIO.read(new File("art/T-Block.png")), 25, 25), 0, i * 30, this);
-        	} catch (IOException e) {
-        		System.out.println("IOError");
-    			return;
-        	}
-        }
-    }
 
 }
