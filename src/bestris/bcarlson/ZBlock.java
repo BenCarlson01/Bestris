@@ -10,7 +10,7 @@ public class ZBlock extends Block4 {
 	private int[] prev;
 	
 	public ZBlock(Block[][] b, boolean[][] f) {
-		super(b, f, color);
+		super(b, f, color, 'Z');
 		cur = new int[8];
 		prev = new int[8];
 		cur[0] = 3;

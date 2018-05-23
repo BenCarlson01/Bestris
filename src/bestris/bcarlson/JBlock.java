@@ -10,7 +10,7 @@ public class JBlock extends Block4 {
 	private int[] prev;
 	
 	public JBlock(Block[][] b, boolean[][] f) {
-		super(b, f, color);
+		super(b, f, color, 'J');
 		cur = new int[8];
 		prev = new int[8];
 		cur[0] = 3;

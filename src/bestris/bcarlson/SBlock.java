@@ -10,7 +10,7 @@ public class SBlock extends Block4 {
 	private int[] prev;
 	
 	public SBlock(Block[][] b, boolean[][] f) {
-		super(b, f, color);
+		super(b, f, color, 'S');
 		cur = new int[8];
 		prev = new int[8];
 		cur[0] = 4;

@@ -1,6 +1,7 @@
 package bestris.bcarlson;
 
 public class Block4 {
+	private char type;
 	private String color;
 	private Block[][] blocks;
 	private boolean[][] full;
@@ -15,10 +16,11 @@ public class Block4 {
 	 * cur[i % 2 == 0] represent x coordinates
 	 * cur[i % 2 != 0] represent y coordinates
 	 */
-	public Block4(Block[][] b, boolean[][] f, String c) {
+	public Block4(Block[][] b, boolean[][] f, String c, char t) {
 		blocks = b;
 		full = f;
 		color = c;
+		type = t;
 		turn = 0;
 		
 		ghost = new int[8];
@@ -32,6 +34,10 @@ public class Block4 {
 	public void setCurPrev(int[] c, int[] p) {
 		cur = c;
 		prev = p;
+	}
+	
+	public char getType() {
+		return type;
 	}
 	
 	public void moveLeft() {
@@ -352,7 +358,6 @@ public class Block4 {
 		}
 		turn -= 1;
 		turn = ((turn % 4) + 4) % 4;
-		turn %= 4;
 		updateColor();
 	}
 	

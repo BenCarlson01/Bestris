@@ -16,5 +16,4 @@ public class HelperMethods {
 
         return dimg;
     } 
-
 }

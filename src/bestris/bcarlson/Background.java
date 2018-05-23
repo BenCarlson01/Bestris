@@ -65,12 +65,15 @@ public class Background extends JPanel implements KeyListener{
 	private int speed = 10; // 1000 / speed milliseconds
 	private int time;
 	private Timer timer;
-	private NextBlocks next;
 	
-	public Background(Block[][] blocks, boolean[][] full, NextBlocks next) {
+	private NextBlocks next;
+	private HoldBlock hold;
+	
+	public Background(Block[][] blocks, boolean[][] full, NextBlocks next, HoldBlock hold) {
 		this.blocks = blocks;
 		this.full = full;
 		this.next = next;
+		this.hold = hold;
 		Map<String, BufferedImage> temp = new HashMap<>();
 		try {
 			temp.put("red", HelperMethods.resize(ImageIO.read(new File("art/Red Tetris Block.png")), 25, 25));
@@ -134,6 +137,13 @@ public class Background extends JPanel implements KeyListener{
 		cur = next.getNextBlock(); //new PurpleBlock(blocks, full); 
 	}
 	
+	public void swapHold() {
+		cur = hold.swap(cur);
+		if (cur == null) {
+			cur = next.getNextBlock();
+		}
+	}
+	
 	public void clearLine() {
 		for (int j = 0; j < 22; j++) {
 			int count = 0;
@@ -175,10 +185,12 @@ public class Background extends JPanel implements KeyListener{
 			cur.moveLeft();
 		} else if (key == KeyEvent.VK_RIGHT) {
 			cur.moveRight();
-		} else if (key == KeyEvent.VK_SPACE){
+		} else if (key == KeyEvent.VK_SPACE) {
             cur.hardDrop();
             newBlock();
-       }
+		} else if (key == KeyEvent.VK_SHIFT) {
+			swapHold();
+		}
     }
 
 	@Override

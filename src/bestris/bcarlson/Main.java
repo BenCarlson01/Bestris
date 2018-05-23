@@ -32,15 +32,19 @@ public class Main {
 			}
 		}
 		NextBlocks next = new NextBlocks(blocks, full);
-        Background back = new Background(blocks, full, next);
+		HoldBlock hold = new HoldBlock(blocks, full);
+        Background back = new Background(blocks, full, next, hold);
 		back.addKeyListener(back);
         back.setFocusable(true);
         GridBagConstraints c = new GridBagConstraints();
-        c.fill = GridBagConstraints.VERTICAL;
         c.gridx = 0;
         c.gridy = 0;
-        frame.add(back, c);
+        frame.add(hold, c);
+        c.fill = GridBagConstraints.VERTICAL;
         c.gridx = 1;
+        c.gridy = 0;
+        frame.add(back, c);
+        c.gridx = 2;
         c.gridy = 0;
         frame.add(next, c);
         frame.pack();

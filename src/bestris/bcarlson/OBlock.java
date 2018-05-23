@@ -8,7 +8,7 @@ public class OBlock extends Block4{
 	private int[] prev;
 	
 	public OBlock(Block[][] b, boolean[][] f) {
-		super(b, f, color);
+		super(b, f, color, 'O');
 		cur = new int[8];
 		prev = new int[8];
 		cur[0] = 4;

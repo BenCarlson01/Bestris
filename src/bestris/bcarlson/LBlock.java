@@ -10,7 +10,7 @@ public class LBlock extends Block4 {
 	private int[] prev;
 	
 	public LBlock(Block[][] b, boolean[][] f) {
-		super(b, f, color);
+		super(b, f, color, 'L');
 		cur = new int[8];
 		prev = new int[8];
 		cur[0] = 5;

@@ -126,6 +126,14 @@ public class BlockPreview extends JPanel{
 			blocks[2][2] = "Z";
 			blocks[3][2] = "Z";
 			break;
+		case 'C':
+			blocks = new String[5][5];
+			for (int i = 0; i < blocks.length; i++) {
+				for (int j = 0; j < blocks[i].length; j++) {
+					blocks[i][j] = "C1";
+				}
+			}
+			break;
 		default:
 			System.out.println("Non-existant block type");
 			return;

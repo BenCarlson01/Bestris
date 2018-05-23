@@ -10,7 +10,7 @@ public class TBlock extends Block4 {
 	private int[] prev;
 	
 	public TBlock(Block[][] b, boolean[][] f) {
-		super(b, f, color);
+		super(b, f, color, 'T');
 		cur = new int[8];
 		prev = new int[8];
 		cur[0] = 4;
