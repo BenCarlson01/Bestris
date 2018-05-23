@@ -1,5 +1,6 @@
 package bestris.bcarlson;
 
+import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -17,6 +18,7 @@ public class BlockPreview extends JPanel{
 	private String[][] blocks;
 	
 	public BlockPreview() {
+		setPreferredSize( new Dimension( 60, 60 ) );
 		Map<String, BufferedImage> temp = new HashMap<>();
 		try {
 			temp.put("Z", HelperMethods.resize(ImageIO.read(new File("art/Red Tetris Block.png")), 12, 12));
@@ -137,13 +139,13 @@ public class BlockPreview extends JPanel{
         
         if (sixbysix) {
         	for (int i = 0; i < blocks.length; i++) {
-            	for (int j = 0; j < blocks[0].length; j++) {
+            	for (int j = 0; j < blocks[i].length; j++) {
                     g.drawImage(colorToBlock.get(blocks[i][j]), i * 10, j * 10, this);
             	}
             }
         } else {
         	for (int i = 0; i < blocks.length; i++) {
-            	for (int j = 0; j < blocks[0].length; j++) {
+            	for (int j = 0; j < blocks[i].length; j++) {
                     g.drawImage(colorToBlock.get(blocks[i][j]), i * 12, j * 12, this);
             	}
             }
