@@ -138,10 +138,12 @@ public class Background extends JPanel implements KeyListener{
 	}
 	
 	public void swapHold() {
+		cur.eraseBlock();
 		cur = hold.swap(cur);
 		if (cur == null) {
 			cur = next.getNextBlock();
 		}
+		repaint();
 	}
 	
 	public void clearLine() {

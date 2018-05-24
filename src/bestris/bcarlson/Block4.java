@@ -405,4 +405,13 @@ public class Block4 {
 				|| full[cur[4]][cur[5]] || full[cur[6]][cur[7]];
 	}
 	
+	public void eraseBlock() {
+		for (int i = 0; i < 8; i += 2) {
+			blocks[ghost[i]][ghost[i + 1]].setColor("clear"); 
+		}
+		for (int i = 0; i < 8; i += 2) {	
+			blocks[cur[i]][cur[i + 1]].setColor("clear"); 
+		}
+	}
+	
 }
