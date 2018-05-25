@@ -33,10 +33,12 @@ public class Main {
 		}
 		NextBlocks next = new NextBlocks(blocks, full);
 		HoldBlock hold = new HoldBlock(blocks, full);
-        Background back = new Background(blocks, full, next, hold);
+		BlockSkins skin = new BlockSkins();
+        Tetris back = new Tetris(blocks, full, next, hold, skin);
 		back.addKeyListener(back);
         back.setFocusable(true);
         GridBagConstraints c = new GridBagConstraints();
+        c.anchor = GridBagConstraints.FIRST_LINE_START;
         c.gridx = 0;
         c.gridy = 0;
         frame.add(hold, c);

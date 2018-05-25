@@ -1,0 +1,15 @@
+1-Series:
+Normal Square:
+ - Luminosity: 50, 62, 75, 87, 100, 125, 150, 175, 200
+ - Saturation: 240
+ - ISquare: Hue = 120
+ - JSquare: Hue = 159
+ - LSquare: Hue = 20
+ - OSquare: Hue = 39
+ - SSquare: Hue = 79
+ - ISquare: Hue = 192
+ - ISquare: Hue = 0
+Gray Square:
+ - Luminosity: 50, 100, 150
+ - Saturation: 0
+ - Hue: 160
