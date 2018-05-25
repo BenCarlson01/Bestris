@@ -2,7 +2,6 @@ package bestris.bcarlson;
 
 public class Block4 {
 	private char type;
-	private String color;
 	private Block[][] blocks;
 	private boolean[][] full;
 	private int[] cur;
@@ -16,10 +15,9 @@ public class Block4 {
 	 * cur[i % 2 == 0] represent x coordinates
 	 * cur[i % 2 != 0] represent y coordinates
 	 */
-	public Block4(Block[][] b, boolean[][] f, String c, char t) {
+	public Block4(Block[][] b, boolean[][] f, char t) {
 		blocks = b;
 		full = f;
-		color = c;
 		type = t;
 		turn = 0;
 		
@@ -80,17 +78,17 @@ public class Block4 {
 	
 	protected void updateColor() {
 		for (int i = 0; i < 8; i += 2) {
-			blocks[prev[i]][prev[i + 1]].setColor("clear"); 
+			blocks[prev[i]][prev[i + 1]].setType('C'); 
 		}
 		updateGhost();
 		for (int i = 0; i < 8; i += 2) {
-			blocks[prevGhost[i]][prevGhost[i + 1]].setColor("clear"); 
+			blocks[prevGhost[i]][prevGhost[i + 1]].setType('C'); 
 		}
 		for (int i = 0; i < 8; i += 2) {
-			blocks[ghost[i]][ghost[i + 1]].setColor("ghost"); 
+			blocks[ghost[i]][ghost[i + 1]].setType('G'); 
 		}
 		for (int i = 0; i < 8; i += 2) {	
-			blocks[cur[i]][cur[i + 1]].setColor(color); 
+			blocks[cur[i]][cur[i + 1]].setType(type); 
 		}
 	}
 	
@@ -407,10 +405,10 @@ public class Block4 {
 	
 	public void eraseBlock() {
 		for (int i = 0; i < 8; i += 2) {
-			blocks[ghost[i]][ghost[i + 1]].setColor("clear"); 
+			blocks[ghost[i]][ghost[i + 1]].setType('C'); 
 		}
 		for (int i = 0; i < 8; i += 2) {	
-			blocks[cur[i]][cur[i + 1]].setColor("clear"); 
+			blocks[cur[i]][cur[i + 1]].setType('C'); 
 		}
 	}
 	

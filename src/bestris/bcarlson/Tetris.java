@@ -21,36 +21,36 @@ public class Tetris extends JPanel implements KeyListener{
 	 * 	C: center of block
 	 * 
 	 * I-Block:
-	 * 	Color: Light Blue
+	 * 	Default color: Light Blue
 	 * 	Shape:	 BBBB
 	 * 
 	 * J-Block:
-	 * 	Color: Dark Blue
+	 * 	Default color: Dark Blue
 	 * 	Shape:	B
 	 * 			BCB
 	 * 
 	 * L-Block:
-	 * 	Color: Orange
+	 * 	Default color: Orange
 	 * 	Shape:	  B
 	 * 			BCB
 	 * 
 	 * O-Block:
-	 * 	Color: Yellow
+	 * 	Default color: Yellow
 	 * 	Shape:	BB
 	 * 			BB
 	 * 
 	 * S-Block:
-	 * 	Color: Green
+	 * 	Default color: Green
 	 * 	Shape:	 BB
 	 * 			BC
 	 * 
 	 * T-Block:
-	 * 	Color: Purple
+	 * 	Default color: Purple
 	 * 	Shape:	 B
 	 * 			BCB
 	 * 
 	 * Z-Block:
-	 * 	Color: Red
+	 *  Default color: Red
 	 * 	Shape:	BB
 	 * 			 CB
 	 */
@@ -110,7 +110,7 @@ public class Tetris extends JPanel implements KeyListener{
         time += speed;
         for (int i = 0; i < blocks.length; i++) {
         	for (int j = 0; j < blocks[0].length; j++) {
-                g.drawImage(colorToBlock.get(blocks[i][j].getColor()), i * 25, j * 25, this);
+                g.drawImage(colorToBlock.get(blocks[i][j].getType()), i * 25, j * 25, this);
         	}
         }
     }
@@ -142,12 +142,12 @@ public class Tetris extends JPanel implements KeyListener{
 			if (count == 10) {
 				updateScore(100);
 				for (int i = 0; i < 10; i++) {
-					blocks[i][j].setColor("clear");
+					blocks[i][j].setType('C');
 					full[i][j] = false;
 				}
 				for (int j2 = j - 1; j2 >= 0; j2--) {
 					for (int i = 0; i < 10; i++) {
-						blocks[i][j2 + 1].setColor(blocks[i][j2].getColor());
+						blocks[i][j2 + 1].setType(blocks[i][j2].getType());
 						full[i][j2 + 1] = full[i][j2];
 					}
 				}

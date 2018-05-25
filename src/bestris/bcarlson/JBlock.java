@@ -1,16 +1,11 @@
 package bestris.bcarlson;
 
 public class JBlock extends Block4 {
-	private static final String color = "dblue";
-	//B
-	//BCB
-	//For Y values, 0 is top, 22 is bot
-	
 	private int[] cur;
 	private int[] prev;
 	
 	public JBlock(Block[][] b, boolean[][] f) {
-		super(b, f, color, 'J');
+		super(b, f, 'J');
 		cur = new int[8];
 		prev = new int[8];
 		cur[0] = 3;

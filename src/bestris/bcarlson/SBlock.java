@@ -1,16 +1,11 @@
 package bestris.bcarlson;
 
 public class SBlock extends Block4 {
-	private static final String color = "green";
-	// BB
-	//BC
-	//For Y values, 0 is top, 22 is bot
-	
 	private int[] cur;
 	private int[] prev;
 	
 	public SBlock(Block[][] b, boolean[][] f) {
-		super(b, f, color, 'S');
+		super(b, f, 'S');
 		cur = new int[8];
 		prev = new int[8];
 		cur[0] = 4;

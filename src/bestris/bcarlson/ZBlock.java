@@ -1,16 +1,11 @@
 package bestris.bcarlson;
 
 public class ZBlock extends Block4 {
-	//BB
-	// CB
-	//For Y values, 0 is top, 22 is bot
-	private static final String color = "red";
-	
 	private int[] cur;
 	private int[] prev;
 	
 	public ZBlock(Block[][] b, boolean[][] f) {
-		super(b, f, color, 'Z');
+		super(b, f, 'Z');
 		cur = new int[8];
 		prev = new int[8];
 		cur[0] = 3;

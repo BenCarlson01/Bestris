@@ -1,16 +1,11 @@
 package bestris.bcarlson;
 
 public class LBlock extends Block4 {
-	private static final String color = "orange";
-	//  B
-	//BCB
-	//For Y values, 0 is top, 22 is bot
-	
 	private int[] cur;
 	private int[] prev;
 	
 	public LBlock(Block[][] b, boolean[][] f) {
-		super(b, f, color, 'L');
+		super(b, f, 'L');
 		cur = new int[8];
 		prev = new int[8];
 		cur[0] = 5;

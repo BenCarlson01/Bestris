@@ -1,14 +1,11 @@
 package bestris.bcarlson;
 
 public class OBlock extends Block4{
-	private static final String color = "yellow";
-	//Top Left Corner
-	//For Y values, 0 is top, 22 is bot
 	private int[] cur;
 	private int[] prev;
 	
 	public OBlock(Block[][] b, boolean[][] f) {
-		super(b, f, color, 'O');
+		super(b, f, 'O');
 		cur = new int[8];
 		prev = new int[8];
 		cur[0] = 4;

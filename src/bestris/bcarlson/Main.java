@@ -1,11 +1,9 @@
 package bestris.bcarlson;
 
-import java.awt.BorderLayout;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 
 import javax.swing.JFrame;
-import javax.swing.JLabel;
 
 public class Main {
 	
@@ -21,7 +19,7 @@ public class Main {
 		for (int i = 0; i < 10; i++) {
 			for (int j = 0; j < 22; j++) {
 				blocks[i][j] = new Block();
-				blocks[i][j].setColor("clear");
+				blocks[i][j].setType('C');
 			}
 		}
 		boolean[][] full = new boolean[10][22];

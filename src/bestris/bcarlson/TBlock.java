@@ -1,16 +1,11 @@
 package bestris.bcarlson;
 
 public class TBlock extends Block4 {
-	private static final String color = "purple";
-	// B
-	//BCB
-	//For Y values, 0 is top, 21 is bot
-	
 	private int[] cur;
 	private int[] prev;
 	
 	public TBlock(Block[][] b, boolean[][] f) {
-		super(b, f, color, 'T');
+		super(b, f, 'T');
 		cur = new int[8];
 		prev = new int[8];
 		cur[0] = 4;

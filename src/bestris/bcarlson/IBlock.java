@@ -1,18 +1,12 @@
 package bestris.bcarlson;
 
 public class IBlock extends Block4 {
-	//BBBB
-	//For Y values, 0 is top, 22 is bot
-	private static final String color = "lblue";
-	
-	private boolean[][] full;
 	private int[] cur;
 	private int[] prev;
 	private int turn;
 	
 	public IBlock(Block[][] b, boolean[][] f) {
-		super(b, f, color, 'I');
-		full = f;
+		super(b, f, 'I');
 		cur = new int[8];
 		prev = new int[8];
 		turn = 0;
