@@ -51,18 +51,18 @@ public class BlockSkins {
 		}
 	}
 
-	public Map<String, BufferedImage> getBlockToArt() {
-		Map<String, BufferedImage> temp = new HashMap<>();
+	public Map<Character, BufferedImage> getBlockToArt() {
+		Map<Character, BufferedImage> temp = new HashMap<>();
 		try {
-			temp.put("I", HelperMethods.resize(ImageIO.read(getBlockSkin('I')), 25, 25));
-			temp.put("J", HelperMethods.resize(ImageIO.read(getBlockSkin('J')), 25, 25));
-			temp.put("L", HelperMethods.resize(ImageIO.read(getBlockSkin('L')), 25, 25));
-			temp.put("O", HelperMethods.resize(ImageIO.read(getBlockSkin('O')), 25, 25));
-			temp.put("S", HelperMethods.resize(ImageIO.read(getBlockSkin('S')), 25, 25));
-			temp.put("T", HelperMethods.resize(ImageIO.read(getBlockSkin('T')), 25, 25));
-			temp.put("Z", HelperMethods.resize(ImageIO.read(getBlockSkin('Z')), 25, 25));
-			temp.put("C", HelperMethods.resize(ImageIO.read(getBlockSkin('C')), 25, 25));
-			temp.put("G", HelperMethods.resize(ImageIO.read(getBlockSkin('G')), 25, 25));
+			temp.put('I', HelperMethods.resize(ImageIO.read(getBlockSkin('I')), 25, 25));
+			temp.put('J', HelperMethods.resize(ImageIO.read(getBlockSkin('J')), 25, 25));
+			temp.put('L', HelperMethods.resize(ImageIO.read(getBlockSkin('L')), 25, 25));
+			temp.put('O', HelperMethods.resize(ImageIO.read(getBlockSkin('O')), 25, 25));
+			temp.put('S', HelperMethods.resize(ImageIO.read(getBlockSkin('S')), 25, 25));
+			temp.put('T', HelperMethods.resize(ImageIO.read(getBlockSkin('T')), 25, 25));
+			temp.put('Z', HelperMethods.resize(ImageIO.read(getBlockSkin('Z')), 25, 25));
+			temp.put('C', HelperMethods.resize(ImageIO.read(getBlockSkin('C')), 25, 25));
+			temp.put('G', HelperMethods.resize(ImageIO.read(getBlockSkin('G')), 25, 25));
 		} catch (IOException e) {
 			System.out.println("Error in BlockSkins.getBlockToArt():");
 			System.out.println("\tRequired art not found in skin folder");

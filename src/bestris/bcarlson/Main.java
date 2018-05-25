@@ -6,11 +6,16 @@ import java.awt.GridBagLayout;
 import javax.swing.JFrame;
 
 public class Main {
-	
 	/**
 	 * Starts up Tetris
 	 */
 	public static void main(String[] args) {
+		/**
+		 * Determines whether to use true randomness or
+		 *  "bag of blocks" randomness.
+		 */
+		boolean TrueRandomness = false;
+		
 		JFrame frame = new JFrame("Bestris");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setLayout(new GridBagLayout());
@@ -29,7 +34,7 @@ public class Main {
 				
 			}
 		}
-		NextBlocks next = new NextBlocks(blocks, full);
+		NextBlocks next = new NextBlocks(blocks, full, TrueRandomness);
 		HoldBlock hold = new HoldBlock(blocks, full);
 		BlockSkins skin = new BlockSkins();
         Tetris back = new Tetris(blocks, full, next, hold, skin);

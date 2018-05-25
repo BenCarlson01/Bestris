@@ -1,6 +1,9 @@
 package bestris.bcarlson;
 
 import java.awt.GridLayout;
+import java.util.ArrayList;
+import java.util.Collections;
+
 import javax.swing.JPanel;
 
 public class NextBlocks extends JPanel {
@@ -10,10 +13,27 @@ public class NextBlocks extends JPanel {
 	private boolean[][] full;
 	private BlockPreview[] prevs;
 	
-	public NextBlocks(Block[][] blocks, boolean[][] full) {
+	private boolean random;
+	private int bagCount;
+	private ArrayList<Character> bag;
+	
+	public NextBlocks(Block[][] blocks, boolean[][] full, boolean TrueRandomness) {
 		setLayout(new GridLayout(5, 1));
 		this.blocks = blocks;
 		this.full = full;
+		
+		random = TrueRandomness;
+		bagCount = 0;
+		bag = new ArrayList<>();
+		bag.add('I');
+		bag.add('J');
+		bag.add('L');
+		bag.add('O');
+		bag.add('S');
+		bag.add('T');
+		bag.add('Z');
+		Collections.shuffle(bag);
+		
 		nextBlock = new char[5];
 		for (int i = 0; i < nextBlock.length; i++) {
 			nextBlock[i] = getNewBlock();
@@ -39,26 +59,36 @@ public class NextBlocks extends JPanel {
 	}
 	
 	private char getNewBlock() {
-		int rand = (int) (Math.random() * 7);
-		switch (rand) {
-		case 0:
-			return 'J';
-		case 1:
-			return 'S';
-		case 2:
-			return 'I';
-		case 3:
-			return 'L';
-		case 4:
-			return 'T';
-		case 5:
-			return 'Z';
-		case 6:
-			return 'O';
-		default:
-			System.out.println("Error in block generation");
-			return 'T';
-	}
+		if (random) {
+			int rand = (int) (Math.random() * 7);
+			switch (rand) {
+			case 0:
+				return 'I';
+			case 1:
+				return 'J';
+			case 2:
+				return 'L';
+			case 3:
+				return 'O';
+			case 4:
+				return 'S';
+			case 5:
+				return 'T';
+			case 6:
+				return 'Z';
+			default:
+				System.out.println("Error in block generation");
+				return 'T';
+			}
+		} else {
+			if (bagCount == 7) {
+				Collections.shuffle(bag);
+				bagCount = 0;
+			}
+			char ret = bag.get(bagCount);
+			bagCount += 1;
+			return ret;
+		}
 	}
 	
 	private Block4 getCorrespondingBlock(char name) {

@@ -15,7 +15,23 @@ import javax.swing.JPanel;
 import javax.swing.Timer;
 
 public class Tetris extends JPanel implements KeyListener{
+	private int speed = 10;
+	
+	private Map<Character, BufferedImage> colorToBlock;
+	private Block[][] blocks;
+	private boolean[][] full;
+	private Block4 cur;
+	private int time;
+	private Timer timer;
+	
+	private NextBlocks next;
+	private HoldBlock hold;
+	
 	/**
+	 * Tetris game main class
+	 * Uses a left to right increasing x (normal)
+	 * 	and a top to bottom increasing y (reversed)
+	 * 
 	 * Block Information:
 	 * 	B: part of block
 	 * 	C: center of block
@@ -54,18 +70,6 @@ public class Tetris extends JPanel implements KeyListener{
 	 * 	Shape:	BB
 	 * 			 CB
 	 */
-	private Map<String, BufferedImage> colorToBlock;
-	
-	private Block[][] blocks;
-	private boolean[][] full;
-	private Block4 cur;
-	private int speed = 10; // 1000 / speed milliseconds
-	private int time;
-	private Timer timer;
-	
-	private NextBlocks next;
-	private HoldBlock hold;
-	
 	public Tetris(Block[][] blocks, boolean[][] full, NextBlocks next, HoldBlock hold,
 			BlockSkins skin) {
 		setBorder(BorderFactory.createLineBorder(Color.black));
