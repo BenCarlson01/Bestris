@@ -1,6 +1,7 @@
 package bestris.bcarlson;
 
 public class Block4 {
+	//Type
 	private char type;
 	private Block[][] blocks;
 	private boolean[][] full;
@@ -10,10 +11,19 @@ public class Block4 {
 	private int[] prevGhost;
 	private int turn;
 	
-	/*
-	 * Let cur[2] and cur[3] be center for all blocks
-	 * cur[i % 2 == 0] represent x coordinates
-	 * cur[i % 2 != 0] represent y coordinates
+	/**
+	 * Block4 is a basic class that provides all the underlying methods
+	 *  for Tetris block movement. This is the parent of every block type
+	 *  and each individual blocks need only to determine the initial
+	 *  positions of the 4 blocks they are composed of. The I and O blocks
+	 *  also need to define their own turning, as they follow a different
+	 *  set of rules.
+	 *  
+	 * Let cur[2] and cur[3] be center for all blocks.
+	 * cur[i % 2 == 0] represent x coordinates.
+	 * cur[i % 2 != 0] represent y coordinates.
+	 * 
+	 * 
 	 */
 	public Block4(Block[][] b, boolean[][] f, char t) {
 		blocks = b;
@@ -65,15 +75,18 @@ public class Block4 {
 		updateColor();
 	}
 	
-	public void hardDrop() {
+	public int hardDrop() {
 		System.arraycopy(cur, 0, prev, 0, 8);
 		int[] temp = new int[8];
+		int count = 0;
 		while (!invalidMove()) {
 			System.arraycopy(cur, 0, temp, 0, 8);
 			moveBlock(0, -1);
+			count += 1;
 		}
 		System.arraycopy(temp, 0, cur, 0, 8);
 		updateColor();
+		return 2 * (count - 1);
 	}
 	
 	protected void updateColor() {

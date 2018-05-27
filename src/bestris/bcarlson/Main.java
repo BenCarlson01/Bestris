@@ -1,9 +1,12 @@
 package bestris.bcarlson;
 
+import java.awt.FlowLayout;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 
 import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
 
 public class Main {
 	/**
@@ -38,20 +41,34 @@ public class Main {
 		HoldBlock hold = new HoldBlock(blocks, full);
 		BlockSkins skin = new BlockSkins();
         Tetris back = new Tetris(blocks, full, next, hold, skin);
+        
+        JPanel scorePanel = new JPanel();
+        scorePanel.setLayout(new FlowLayout());
+        JLabel scoreLabel = new JLabel("Score");
+        JLabel score = new JLabel("0");
+        scorePanel.add(scoreLabel);
+        scorePanel.add(score);
+        
 		back.addKeyListener(back);
         back.setFocusable(true);
         GridBagConstraints c = new GridBagConstraints();
         c.anchor = GridBagConstraints.FIRST_LINE_START;
-        c.gridx = 0;
-        c.gridy = 0;
+        //c.gridx = 0;
+        //c.gridy = 0;
         frame.add(hold, c);
-        c.fill = GridBagConstraints.VERTICAL;
-        c.gridx = 1;
-        c.gridy = 0;
-        frame.add(back, c);
-        c.gridx = 2;
-        c.gridy = 0;
+        c.anchor = GridBagConstraints.PAGE_START;
+        //c.gridx = 1;
+        //c.gridy = 0;
+        frame.add(scorePanel, c);
+        c.anchor = GridBagConstraints.FIRST_LINE_END;
+        //c.gridx = 2;
+        //c.gridy = 0;
         frame.add(next, c);
+        c.anchor = GridBagConstraints.CENTER;
+        //c.fill = GridBagConstraints.VERTICAL;
+        //c.gridx = 1;
+        //c.gridy = 1;
+        frame.add(back, c);
         frame.pack();
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);

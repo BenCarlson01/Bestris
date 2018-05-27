@@ -8,6 +8,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.image.BufferedImage;
+import java.util.ArrayList;
 import java.util.Map;
 
 import javax.swing.BorderFactory;
@@ -26,6 +27,10 @@ public class Tetris extends JPanel implements KeyListener{
 	
 	private NextBlocks next;
 	private HoldBlock hold;
+	
+	//[# Combos, # of Tetrises, B2B single T-Spins, B2B double T-Spins, B2B triple T-Spins]
+	private int[] clearTracker;
+	private int level;
 	
 	/**
 	 * Tetris game main class
@@ -90,11 +95,14 @@ public class Tetris extends JPanel implements KeyListener{
         timer.setRepeats(true);
         timer.setCoalesce(true);
         timer.start();
+        
+        clearTracker = new int[5];
+        level = 1;
 	}
 	
 	@Override
     public Dimension getPreferredSize() {
-        return new Dimension(250, 550);
+        return new Dimension(250, 500);
     }
 
     @Override
@@ -112,9 +120,9 @@ public class Tetris extends JPanel implements KeyListener{
         	}
         }
         time += speed;
-        for (int i = 0; i < blocks.length; i++) {
-        	for (int j = 0; j < blocks[0].length; j++) {
-                g.drawImage(colorToBlock.get(blocks[i][j].getType()), i * 25, j * 25, this);
+        for (int i = 0; i < 10; i++) {
+        	for (int j = 0; j < 20; j++) {
+                g.drawImage(colorToBlock.get(blocks[i][j + 2].getType()), i * 25, j * 25, this);
         	}
         }
     }
@@ -136,14 +144,15 @@ public class Tetris extends JPanel implements KeyListener{
 	}
 	
 	public void clearLine() {
+		ArrayList<Integer> fullRows = new ArrayList<>();
 		for (int j = 0; j < 22; j++) {
-			int count = 0;
+			boolean fullRow = true;
 			for (int i = 0; i < 10; i++) {
-				if (full[i][j]) {
-					count++;
-				}
+				fullRow = fullRow && full[i][j];
 			}
-			if (count == 10) {
+			if (fullRow) {
+				fullRows.add(j);
+				/*
 				updateScore(100);
 				for (int i = 0; i < 10; i++) {
 					blocks[i][j].setType('C');
@@ -155,8 +164,11 @@ public class Tetris extends JPanel implements KeyListener{
 						full[i][j2 + 1] = full[i][j2];
 					}
 				}
+				*/
 			}
 		}
+		int score = 0;
+		
 	}
 	
 	public int updateScore(int amt) {
@@ -173,13 +185,14 @@ public class Tetris extends JPanel implements KeyListener{
 		} else if (key == KeyEvent.VK_ALT) {
 			cur.turnLeft();
     	} else if (key == KeyEvent.VK_DOWN) {
+    		updateScore(1);
 			cur.moveDown();
 		} else if (key == KeyEvent.VK_LEFT) {
 			cur.moveLeft();
 		} else if (key == KeyEvent.VK_RIGHT) {
 			cur.moveRight();
 		} else if (key == KeyEvent.VK_SPACE) {
-            cur.hardDrop();
+            updateScore(cur.hardDrop());
             newBlock();
 		} else if (key == KeyEvent.VK_SHIFT) {
 			swapHold();
