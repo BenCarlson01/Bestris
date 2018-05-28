@@ -11,7 +11,6 @@ public class TetrisScore extends JPanel {
 	
 	public TetrisScore(Block[][] blocks, boolean[][] full, NextBlocks next, HoldBlock hold,
 			BlockSkins skin) {
-		//setLayout(new GridLayout(2, 1));
 		setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
 		
 		JPanel scorePanel = new JPanel();

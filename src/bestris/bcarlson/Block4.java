@@ -66,13 +66,16 @@ public class Block4 {
 		updateColor();
 	}
 	
-	public void moveDown() {
+	public int moveDown() {
 		System.arraycopy(cur, 0, prev, 0, 8);
+		int score = 1;
 		moveBlock(0, -1);
 		if (invalidMove()) {
 			System.arraycopy(prev, 0, cur, 0, 8);
+			score = 0;
 		}
 		updateColor();
+		return score;
 	}
 	
 	public int hardDrop() {

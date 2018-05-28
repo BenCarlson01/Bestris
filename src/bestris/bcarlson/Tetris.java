@@ -174,7 +174,59 @@ public class Tetris extends JPanel implements KeyListener{
 			}
 		}
 		int score = 0;
-		
+		if (cur.getType() == 'T') {
+			
+		}
+		switch (fullRows.size()) {
+		case 0:
+			clearTracker[0] = 0;
+			return;
+		case 1:
+			score += 50 * clearTracker[0] * level;
+			clearTracker[0] += 1;
+			clearTracker[1] = 0;
+			score += 100 * level;
+			break;
+		case 2:
+			score += 50 * clearTracker[0] * level;
+			clearTracker[0] += 1;
+			clearTracker[1] = 0;
+			score += 300 * level;
+			break;
+		case 3:
+			score += 50 * clearTracker[0] * level;
+			clearTracker[0] += 1;
+			clearTracker[1] = 0;
+			score += 500 * level;
+			break;
+		case 4:
+			if (clearTracker[1] == 0) {
+				score += 50 * clearTracker[0] * level;
+				clearTracker[0] += 1;
+				clearTracker[1] = 1;
+				score += 800 * level;
+			} else {
+				score += 50 * clearTracker[0] * level;
+				clearTracker[0] += 1;
+				score += 1200 * level;
+			}
+			break;
+		default:
+			throw new GameException("Error in Tetris.clearLine():\n\tImpossible number of lines cleared");
+		}
+		updateScore(score);
+		for (Integer j : fullRows) {
+			for (int i = 0; i < 10; i++) {
+				blocks[i][j].setType('C');
+				full[i][j] = false;
+			}
+			for (int j2 = j - 1; j2 >= 0; j2--) {
+				for (int i = 0; i < 10; i++) {
+					blocks[i][j2 + 1].setType(blocks[i][j2].getType());
+					full[i][j2 + 1] = full[i][j2];
+				}
+			}
+		}
 	}
 	
 	public void updateScore(int amt) {
@@ -192,8 +244,7 @@ public class Tetris extends JPanel implements KeyListener{
 		} else if (key == KeyEvent.VK_ALT) {
 			cur.turnLeft();
     	} else if (key == KeyEvent.VK_DOWN) {
-    		updateScore(1);
-			cur.moveDown();
+    		updateScore(cur.moveDown());
 		} else if (key == KeyEvent.VK_LEFT) {
 			cur.moveLeft();
 		} else if (key == KeyEvent.VK_RIGHT) {
