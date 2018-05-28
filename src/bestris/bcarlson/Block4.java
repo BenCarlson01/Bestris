@@ -86,7 +86,7 @@ public class Block4 {
 		}
 		System.arraycopy(temp, 0, cur, 0, 8);
 		updateColor();
-		return 2 * (count - 1);
+		return Math.max(0, 2 * (count - 1));
 	}
 	
 	protected void updateColor() {

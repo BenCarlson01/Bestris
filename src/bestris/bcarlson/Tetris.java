@@ -2,7 +2,9 @@ package bestris.bcarlson;
 
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.FlowLayout;
 import java.awt.Graphics;
+import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
@@ -12,6 +14,7 @@ import java.util.ArrayList;
 import java.util.Map;
 
 import javax.swing.BorderFactory;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
@@ -31,6 +34,7 @@ public class Tetris extends JPanel implements KeyListener{
 	//[# Combos, # of Tetrises, B2B single T-Spins, B2B double T-Spins, B2B triple T-Spins]
 	private int[] clearTracker;
 	private int level;
+	private JLabel scoreLabel;
 	
 	/**
 	 * Tetris game main class
@@ -76,12 +80,14 @@ public class Tetris extends JPanel implements KeyListener{
 	 * 			 CB
 	 */
 	public Tetris(Block[][] blocks, boolean[][] full, NextBlocks next, HoldBlock hold,
-			BlockSkins skin) {
+			BlockSkins skin, JLabel scoreLabel) {
 		setBorder(BorderFactory.createLineBorder(Color.black));
+		setLayout(new GridLayout(2, 1));
 		this.blocks = blocks;
 		this.full = full;
 		this.next = next;
 		this.hold = hold;
+		this.scoreLabel = scoreLabel;
 		
 		colorToBlock = skin.getBlockToArt();
 		cur = next.getNextBlock();
@@ -171,8 +177,9 @@ public class Tetris extends JPanel implements KeyListener{
 		
 	}
 	
-	public int updateScore(int amt) {
-		return amt;
+	public void updateScore(int amt) {
+		int cur = Integer.parseInt(scoreLabel.getText());
+		scoreLabel.setText("" + (cur + amt));
 	}
 
     /*
