@@ -1,10 +1,15 @@
 package bestris.bcarlson;
 
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.Collections;
 
+import javax.swing.BoxLayout;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.Timer;
 
 public class NextBlocks extends JPanel {
 	
@@ -17,8 +22,13 @@ public class NextBlocks extends JPanel {
 	private int bagCount;
 	private ArrayList<Character> bag;
 	
+	private JLabel clearLabel;
+	private JLabel clearLabel2;
+	private Timer timer;
+	
 	public NextBlocks(Block[][] blocks, boolean[][] full, boolean TrueRandomness) {
-		setLayout(new GridLayout(5, 1));
+		//setLayout(new GridLayout(5, 1));
+		setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
 		this.blocks = blocks;
 		this.full = full;
 		
@@ -44,6 +54,22 @@ public class NextBlocks extends JPanel {
 			prevs[i].displayBlock(nextBlock[i]);
 			add(prevs[i]);
 		}
+		
+		clearLabel = new JLabel("                ");
+		clearLabel2 = new JLabel("                ");
+		//clearLabel.setVisible(false);
+		add(clearLabel);
+		add(clearLabel2);
+		timer = new Timer(2500, new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+        		//clearLabel.setVisible(false);
+            	clearLabel.setText("                ");
+            	clearLabel2.setText("                ");
+            }
+        });
+        //timer.setRepeats(true);
+        //timer.setCoalesce(true);
 	}
 	
 	public Block4 getNextBlock() {
@@ -112,5 +138,18 @@ public class NextBlocks extends JPanel {
 			return new TBlock(blocks, full);
 		}
 	}
-
+	
+	public void clearLabelAnimate(String word) {
+		timer.stop();
+		clearLabel.setText(word);
+		//clearLabel.setVisible(true);
+        timer.start();
+	}
+	
+	public void clearLabelAnimate2(String word) {
+		timer.stop();
+		clearLabel2.setText(word);
+		//clearLabel.setVisible(true);
+        timer.start();
+	}
 }

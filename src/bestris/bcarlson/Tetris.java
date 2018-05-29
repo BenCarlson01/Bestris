@@ -176,43 +176,50 @@ public class Tetris extends JPanel implements KeyListener{
 		int score = 0;
 		if (cur.getType() == 'T') {
 			
-		}
+		} else {
 		switch (fullRows.size()) {
-		case 0:
-			clearTracker[0] = 0;
-			return;
-		case 1:
-			score += 50 * clearTracker[0] * level;
-			clearTracker[0] += 1;
-			clearTracker[1] = 0;
-			score += 100 * level;
-			break;
-		case 2:
-			score += 50 * clearTracker[0] * level;
-			clearTracker[0] += 1;
-			clearTracker[1] = 0;
-			score += 300 * level;
-			break;
-		case 3:
-			score += 50 * clearTracker[0] * level;
-			clearTracker[0] += 1;
-			clearTracker[1] = 0;
-			score += 500 * level;
-			break;
-		case 4:
-			if (clearTracker[1] == 0) {
+			case 0:
+				clearTracker[0] = 0;
+				return;
+			case 1:
 				score += 50 * clearTracker[0] * level;
 				clearTracker[0] += 1;
-				clearTracker[1] = 1;
-				score += 800 * level;
-			} else {
+				clearTracker[1] = 0;
+				score += 100 * level;
+				next.clearLabelAnimate("   Single   ");
+				break;
+			case 2:
 				score += 50 * clearTracker[0] * level;
 				clearTracker[0] += 1;
-				score += 1200 * level;
+				clearTracker[1] = 0;
+				score += 300 * level;
+				next.clearLabelAnimate("   Double   ");
+				break;
+			case 3:
+				score += 50 * clearTracker[0] * level;
+				clearTracker[0] += 1;
+				clearTracker[1] = 0;
+				score += 500 * level;
+				next.clearLabelAnimate("   Triple   ");
+				break;
+			case 4:
+				if (clearTracker[1] == 0) {
+					score += 50 * clearTracker[0] * level;
+					clearTracker[0] += 1;
+					clearTracker[1] = 1;
+					score += 800 * level;
+					next.clearLabelAnimate("   Tetris   ");
+				} else {
+					score += 50 * clearTracker[0] * level;
+					clearTracker[0] += 1;
+					score += 1200 * level;
+					next.clearLabelAnimate("Back to Back");
+					next.clearLabelAnimate2("   Tetris   ");
+				}
+				break;
+			default:
+				throw new GameException("Error in Tetris.clearLine():\n\tImpossible number of lines cleared");
 			}
-			break;
-		default:
-			throw new GameException("Error in Tetris.clearLine():\n\tImpossible number of lines cleared");
 		}
 		updateScore(score);
 		for (Integer j : fullRows) {
