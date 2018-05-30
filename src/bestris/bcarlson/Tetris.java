@@ -177,7 +177,7 @@ public class Tetris extends JPanel implements KeyListener{
 		if (cur.getType() == 'T') {
 			
 		} else {
-		switch (fullRows.size()) {
+			switch (fullRows.size()) {
 			case 0:
 				clearTracker[0] = 0;
 				return;
@@ -213,13 +213,16 @@ public class Tetris extends JPanel implements KeyListener{
 					score += 50 * clearTracker[0] * level;
 					clearTracker[0] += 1;
 					score += 1200 * level;
-					next.clearLabelAnimate("Back to Back");
-					next.clearLabelAnimate2("   Tetris   ");
+					next.clearLabelAnimate2("Back to Back");
+					next.clearLabelAnimate("   Tetris   ");
 				}
 				break;
 			default:
 				throw new GameException("Error in Tetris.clearLine():\n\tImpossible number of lines cleared");
 			}
+		}
+		if (clearTracker[0] > 1) {
+			hold.comboAnimate(clearTracker[0] - 1);
 		}
 		updateScore(score);
 		for (Integer j : fullRows) {

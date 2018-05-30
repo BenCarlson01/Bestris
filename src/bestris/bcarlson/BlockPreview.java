@@ -2,6 +2,8 @@ package bestris.bcarlson;
 
 import java.awt.Dimension;
 import java.awt.Graphics;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -10,7 +12,10 @@ import java.util.HashMap;
 import java.util.Map;
 
 import javax.imageio.ImageIO;
+import javax.swing.BoxLayout;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.Timer;
 
 public class BlockPreview extends JPanel{
 	private boolean sixbysix;
@@ -159,5 +164,4 @@ public class BlockPreview extends JPanel{
             }
         }
     }
-
 }

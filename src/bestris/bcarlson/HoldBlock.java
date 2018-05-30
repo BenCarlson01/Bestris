@@ -1,8 +1,13 @@
 package bestris.bcarlson;
 
 import java.awt.FlowLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
+import javax.swing.BoxLayout;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.Timer;
 
 public class HoldBlock extends JPanel {
 	
@@ -12,8 +17,11 @@ public class HoldBlock extends JPanel {
 	private Block[][] blocks;
 	private boolean[][] full;
 	
+	private JLabel comboLabel;
+	private Timer timer;
+	
 	public HoldBlock(Block[][] blocks, boolean[][] full) {
-		setLayout(new FlowLayout());
+		setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
 		heldBlock = new BlockPreview();
 		heldBlock.displayBlock('C');
 		add(heldBlock);
@@ -21,6 +29,15 @@ public class HoldBlock extends JPanel {
 		
 		this.blocks = blocks;
 		this.full = full;
+		
+		comboLabel = new JLabel("                ");
+		add(comboLabel);
+		timer = new Timer(2500, new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+            	comboLabel.setText("                ");
+            }
+        });
 	}
 	
 	public Block4 swap(Block4 newBlock4) {
@@ -58,5 +75,11 @@ public class HoldBlock extends JPanel {
 			System.out.println("Error in block generation");
 			return new TBlock(blocks, full);
 		}
+	}
+
+	public void comboAnimate(int combo) {
+		timer.stop();
+		comboLabel.setText("Combo: " + combo);
+        timer.start();
 	}
 }
