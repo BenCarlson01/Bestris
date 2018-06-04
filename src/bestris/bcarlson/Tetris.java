@@ -175,7 +175,35 @@ public class Tetris extends JPanel implements KeyListener{
 		}
 		int score = 0;
 		if (cur.getType() == 'T') {
-			
+			switch (fullRows.size()) {
+			case 0:
+				clearTracker[0] = 0;
+				return;
+			case 1:
+				score += 50 * clearTracker[0] * level;
+				clearTracker[0] += 1;
+				clearTracker[1] = 0;
+				score += 100 * level;
+				next.clearLabelAnimate("   Single   ");
+				break;
+			case 2:
+				score += 50 * clearTracker[0] * level;
+				clearTracker[0] += 1;
+				clearTracker[1] = 0;
+				score += 300 * level;
+				next.clearLabelAnimate("   Double   ");
+				break;
+			case 3:
+				score += 50 * clearTracker[0] * level;
+				clearTracker[0] += 1;
+				clearTracker[1] = 0;
+				score += 500 * level;
+				next.clearLabelAnimate2("   T-Spin   ");
+				next.clearLabelAnimate("   Triple   ");
+				break;
+			default:
+				throw new GameException("Error in Tetris.clearLine():\n\tImpossible number of lines cleared with T-Block");
+			}
 		} else {
 			switch (fullRows.size()) {
 			case 0:
@@ -213,7 +241,7 @@ public class Tetris extends JPanel implements KeyListener{
 					score += 50 * clearTracker[0] * level;
 					clearTracker[0] += 1;
 					score += 1200 * level;
-					next.clearLabelAnimate2("Back to Back");
+					next.clearLabelAnimate2("    B2B    ");
 					next.clearLabelAnimate("   Tetris   ");
 				}
 				break;
