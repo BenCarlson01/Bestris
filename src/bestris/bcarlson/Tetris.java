@@ -31,7 +31,7 @@ public class Tetris extends JPanel implements KeyListener{
 	private NextBlocks next;
 	private HoldBlock hold;
 	
-	//[# Combos, # of Tetrises, B2B single T-Spins, B2B double T-Spins, B2B triple T-Spins]
+	//[# Combos, # of Tetrises, B2B T-Spin mini, B2B single T-Spins, B2B double T-Spins, B2B triple T-Spins]
 	private int[] clearTracker;
 	private int level;
 	private JLabel scoreLabel;
@@ -176,33 +176,39 @@ public class Tetris extends JPanel implements KeyListener{
 		int score = 0;
 		//For T-Spins
 		if (cur.getType() == 'T' && cur.spun()) {
+			next.clearLabelAnimate2("   T-Spin   ");
 			switch (fullRows.size()) {
+			//Special because should not reset Tetris
+			//clearTracker[2]
 			case 0:
 				clearTracker[0] = 0;
-				next.clearLabelAnimate2("   T-Spin   ");
+				score += 400 * level;
+				if (clearTracker[2] == 0) {
+					clearTracker[2] = 1;
+				} else {
+					score += 150 * level;	
+				}
+				updateScore(score);
 				return;
+			//clearTracker[3]
 			case 1:
-				score += 50 * clearTracker[0] * level;
-				clearTracker[0] += 1;
-				clearTracker[1] = 0;
-				score += 100 * level;
-				next.clearLabelAnimate2("   T-Spin   ");
+				if (clearTracker[3] == 0) {
+					score += updateTracker(100, 2);
+				}
 				next.clearLabelAnimate("   Single   ");
 				break;
+			//clearTracker[4]
 			case 2:
-				score += 50 * clearTracker[0] * level;
 				clearTracker[0] += 1;
 				clearTracker[1] = 0;
 				score += 300 * level;
-				next.clearLabelAnimate2("   T-Spin   ");
 				next.clearLabelAnimate("   Double   ");
 				break;
+			//clearTracker[5]
 			case 3:
-				score += 50 * clearTracker[0] * level;
 				clearTracker[0] += 1;
 				clearTracker[1] = 0;
 				score += 500 * level;
-				next.clearLabelAnimate2("   T-Spin   ");
 				next.clearLabelAnimate("   Triple   ");
 				break;
 			default:
@@ -210,43 +216,30 @@ public class Tetris extends JPanel implements KeyListener{
 			}
 		} else {
 			switch (fullRows.size()) {
+			//Special because should not reset Tetris
 			case 0:
 				clearTracker[0] = 0;
+				clearTracker[2] = 0;
 				return;
 			case 1:
-				score += 50 * clearTracker[0] * level;
-				clearTracker[0] += 1;
-				clearTracker[1] = 0;
-				score += 100 * level;
+				score += updateTracker(100, 0);
 				next.clearLabelAnimate("   Single   ");
 				break;
 			case 2:
-				score += 50 * clearTracker[0] * level;
-				clearTracker[0] += 1;
-				clearTracker[1] = 0;
-				score += 300 * level;
+				score += updateTracker(300, 0);
 				next.clearLabelAnimate("   Double   ");
 				break;
 			case 3:
-				score += 50 * clearTracker[0] * level;
-				clearTracker[0] += 1;
-				clearTracker[1] = 0;
-				score += 500 * level;
+				score += updateTracker(500, 0);
 				next.clearLabelAnimate("   Triple   ");
 				break;
 			case 4:
+				next.clearLabelAnimate("   Tetris   ");
 				if (clearTracker[1] == 0) {
-					score += 50 * clearTracker[0] * level;
-					clearTracker[0] += 1;
-					clearTracker[1] = 1;
-					score += 800 * level;
-					next.clearLabelAnimate("   Tetris   ");
+					score += updateTracker(800, 1);
 				} else {
-					score += 50 * clearTracker[0] * level;
-					clearTracker[0] += 1;
-					score += 1200 * level;
+					score += updateTracker(1200, 1);
 					next.clearLabelAnimate2("    B2B    ");
-					next.clearLabelAnimate("   Tetris   ");
 				}
 				break;
 			default:
@@ -274,6 +267,25 @@ public class Tetris extends JPanel implements KeyListener{
 	public void updateScore(int amt) {
 		int cur = Integer.parseInt(scoreLabel.getText());
 		scoreLabel.setText("" + (cur + amt));
+	}
+	
+	public int updateTracker(int amt, int type) {
+		int score = 0;
+		score += 50 * clearTracker[0] * level;
+		score += amt * level;
+		clearTracker[0] += 1;
+		clearTracker[1] = 0;
+		clearTracker[2] = 0;
+		switch (type) {
+		case 0: 
+			//Does nothing
+			break;
+		case 1:
+			clearTracker[1] = 1;
+		default:
+			throw new GameException("Error in Tetris.updateTacker():\n\tImpossible type");
+		}
+		return score;
 	}
 
     /*
