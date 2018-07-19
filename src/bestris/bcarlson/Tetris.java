@@ -174,16 +174,19 @@ public class Tetris extends JPanel implements KeyListener{
 			}
 		}
 		int score = 0;
-		if (cur.getType() == 'T') {
+		//For T-Spins
+		if (cur.getType() == 'T' && cur.spun()) {
 			switch (fullRows.size()) {
 			case 0:
 				clearTracker[0] = 0;
+				next.clearLabelAnimate2("   T-Spin   ");
 				return;
 			case 1:
 				score += 50 * clearTracker[0] * level;
 				clearTracker[0] += 1;
 				clearTracker[1] = 0;
 				score += 100 * level;
+				next.clearLabelAnimate2("   T-Spin   ");
 				next.clearLabelAnimate("   Single   ");
 				break;
 			case 2:
@@ -191,6 +194,7 @@ public class Tetris extends JPanel implements KeyListener{
 				clearTracker[0] += 1;
 				clearTracker[1] = 0;
 				score += 300 * level;
+				next.clearLabelAnimate2("   T-Spin   ");
 				next.clearLabelAnimate("   Double   ");
 				break;
 			case 3:

@@ -428,4 +428,7 @@ public class Block4 {
 		}
 	}
 	
+	public boolean spun() {
+		return false;
+	}
 }
