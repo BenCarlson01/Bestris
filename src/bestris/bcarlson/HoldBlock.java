@@ -30,12 +30,12 @@ public class HoldBlock extends JPanel {
 		this.blocks = blocks;
 		this.full = full;
 		
-		comboLabel = new JLabel("                ");
+		comboLabel = new JLabel("                        ");
 		add(comboLabel);
 		timer = new Timer(2500, new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-            	comboLabel.setText("                ");
+            	comboLabel.setText("                        ");
             }
         });
 	}
@@ -79,7 +79,7 @@ public class HoldBlock extends JPanel {
 
 	public void comboAnimate(int combo) {
 		timer.stop();
-		comboLabel.setText("Combo: " + combo);
+		comboLabel.setText("Combo: " + combo + "        ");
         timer.start();
 	}
 }

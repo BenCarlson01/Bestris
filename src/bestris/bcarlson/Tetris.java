@@ -175,7 +175,7 @@ public class Tetris extends JPanel implements KeyListener{
 		}
 		int score = 0;
 		//For T-Spins
-		if (cur.getType() == 'T' && cur.spun()) {
+		if (cur.getType() == 'T' && ((TBlock) cur).spun()) {
 			next.clearLabelAnimate2("   T-Spin   ");
 			switch (fullRows.size()) {
 			//Special because should not reset Tetris
@@ -276,12 +276,24 @@ public class Tetris extends JPanel implements KeyListener{
 		clearTracker[0] += 1;
 		clearTracker[1] = 0;
 		clearTracker[2] = 0;
+		clearTracker[3] = 0;
+		clearTracker[4] = 0;
 		switch (type) {
 		case 0: 
 			//Does nothing
 			break;
 		case 1:
 			clearTracker[1] = 1;
+			break;
+		case 2:
+			clearTracker[2] = 1;
+			break;
+		case 3:
+			clearTracker[3] = 1;
+			break;
+		case 4:
+			clearTracker[4] = 1;
+			break;
 		default:
 			throw new GameException("Error in Tetris.updateTacker():\n\tImpossible type");
 		}
